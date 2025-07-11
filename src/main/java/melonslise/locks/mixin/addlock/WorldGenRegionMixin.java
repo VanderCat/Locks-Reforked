@@ -4,7 +4,6 @@ import melonslise.locks.common.util.LocksUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.WorldGenRegion;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkAccess;
@@ -25,8 +24,7 @@ public class WorldGenRegionMixin {
     @Inject(method = "setBlock", at = @At(value = "RETURN", ordinal = 1))
     public void lockBlock(BlockPos blockPos, BlockState blockState, int i, int j, CallbackInfoReturnable<Boolean> cir) {
         ServerLevel level = this.level;
-        RandomSource randomSource = RandomSource.create();
         ChunkAccess chunkAccess = ((WorldGenRegion)(Object)this).getChunk(blockPos);
-        LocksUtil.lockChunk((LevelAccessor) this, level, blockPos, randomSource, chunkAccess);
+        //LocksUtil.lockChunk((LevelAccessor) this, level, blockPos, chunkAccess);
     }
 }

@@ -13,7 +13,6 @@ import net.minecraft.core.Vec3i;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -26,11 +25,17 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.util.Arrays;
 import java.util.List;
@@ -54,10 +59,6 @@ public final class LocksUtil {
             array[index] = array[a];
             array[a] = temp;
         }
-    }
-
-    public static boolean chance(RandomSource rng, double ch) {
-        return ch == 1d || ch != 0d && rng.nextDouble() <= ch;
     }
 
     public static BlockPos transform(int x, int y, int z, StructurePlaceSettings settings) {
@@ -155,10 +156,11 @@ public final class LocksUtil {
     }
 
     // TODO: 方块遮挡判断
-    public static Lockable lockWhenGen(LevelAccessor levelAccessor, ServerLevel level, BlockPos blockPos, RandomSource randomSource) {
+    public static Lockable lockWhenGen(LevelAccessor levelAccessor, ServerLevel level, BlockPos blockPos) {
+        var stack = getRandomLock(level);
+        if (stack == null) 
+            return null;
         BlockState state = levelAccessor.getBlockState(blockPos);
-        Block block = state.getBlock();
-        if (!LocksConfig.canGen(randomSource, block)) return null;
         BlockPos pos1 = blockPos;
         Direction dir = null;
         if (state.hasProperty(FACING)) {
@@ -194,28 +196,38 @@ public final class LocksUtil {
             }
         }
         Cuboid6i bb = new Cuboid6i(blockPos, pos1);
-        ItemStack stack = LocksConfig.getRandomLock(randomSource);
         Lock lock = Lock.from(stack);
         Transform tr = Transform.fromDirection(dir, dir);
         return new Lockable(bb, lock, tr, stack, level);
     }
 
-    public static Lockable lockCheck(LevelAccessor levelAccessor, ServerLevel level, BlockPos blockPos, RandomSource randomSource) {
+    public static ItemStack getRandomLock(ServerLevel level) {
+        var lootTable = level.getServer().getLootData().getLootTable(new ResourceLocation("locks:locks"));
+        var params = new LootParams.Builder(level).create(LootContextParamSets.EMPTY);
+        var context = new LootContext.Builder(params).withOptionalRandomSeed(0).create(lootTable.randomSequence);
+        var loot = lootTable.getRandomItems(context);
+        if (loot.size() < 1) {
+            return null;
+        }
+        return loot.pop();
+    }
+
+    public static Lockable lockCheck(LevelAccessor levelAccessor, ServerLevel level, BlockPos blockPos) {
         if (levelAccessor.hasChunk(blockPos.getX() >> 4, blockPos.getZ() >> 4)){
-            return lockWhenGen(levelAccessor, level, blockPos, randomSource);
+            return lockWhenGen(levelAccessor, level, blockPos);
         }
         return null;
     }
 
-    public static boolean lockChunk(LevelAccessor levelAccessor, ServerLevel level, BlockPos blockPos, RandomSource randomSource, ChunkAccess chunkAccess){
-        Lockable lkb = LocksUtil.lockCheck(levelAccessor, level, blockPos, randomSource);
+    public static boolean lockChunk(LevelAccessor levelAccessor, ServerLevel level, BlockPos blockPos, ChunkAccess chunkAccess){
+        Lockable lkb = LocksUtil.lockCheck(levelAccessor, level, blockPos);
         if (lkb == null) return false;
         ((ILockableProvider) chunkAccess).getLockables().add(lkb);
         return true;
     }
 
-    public static boolean lockChunk(LevelAccessor levelAccessor, ServerLevel level, BlockPos blockPos, RandomSource randomSource){
-        Lockable lkb = LocksUtil.lockCheck(levelAccessor, level, blockPos, randomSource);
+    public static boolean lockChunk(LevelAccessor levelAccessor, ServerLevel level, BlockPos blockPos){
+        Lockable lkb = LocksUtil.lockCheck(levelAccessor, level, blockPos);
         if (lkb == null) return false;
         lkb.bb.getContainedChunks((x, z) -> {
             ((ILockableProvider) levelAccessor.getChunk(x, z)).getLockables().add(lkb);

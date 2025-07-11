@@ -17,14 +17,13 @@ public final class Locks implements ModInitializer
 {
 	public static final String ID = "locks";
 
-	public static final Logger LOGGER = LogManager.getLogger();
+	public static final Logger LOGGER = LogManager.getLogger("Locks");
 
 	@Override
 	public void onInitialize() {
 
 		//EnumModifier.run();
 		//TODO: run the EnumModifier class to add enchantments to the game
-
 		LocksItems.register();
 		LocksEnchantments.register();
 		LocksSoundEvents.register();
@@ -34,6 +33,7 @@ public final class Locks implements ModInitializer
 		LocksEvents.register();
 		LocksNetwork.register();
 		LocksFeatures.register();
+		LocksLootParamSets.register();
 		ForgeConfigRegistry.INSTANCE.register(ID, Type.COMMON, LocksConfig.SPEC);
 		ForgeConfigRegistry.INSTANCE.register(ID, Type.SERVER, LocksServerConfig.SPEC);
 	}

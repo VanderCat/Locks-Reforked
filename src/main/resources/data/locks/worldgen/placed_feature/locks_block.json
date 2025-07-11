@@ -1,8 +1,0 @@
-{
-  "feature": "locks:locks_block",
-  "placement": [
-    {
-      "type": "minecraft:biome"
-    }
-  ]
-}

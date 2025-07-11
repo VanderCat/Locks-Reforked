@@ -21,3 +21,7 @@ accessible method net/minecraft/client/multiplayer/ClientChunkCache$Storage getC
 accessible field net/minecraft/server/players/PlayerList players Ljava/util/List;
 accessible method net/minecraft/world/level/block/entity/RandomizableContainerBlockEntity getItems ()Lnet/minecraft/core/NonNullList;
 accessible method net/minecraft/client/renderer/LevelRenderer checkPoseStack (Lcom/mojang/blaze3d/vertex/PoseStack;)V
+accessible field net/minecraft/world/level/storage/loot/LootTable randomSequence Lnet/minecraft/resources/ResourceLocation;
+accessible method net/minecraft/world/level/storage/loot/LootTable getRandomItems (Lnet/minecraft/world/level/storage/loot/LootContext;)Lit/unimi/dsi/fastutil/objects/ObjectArrayList;
+accessible field net/minecraft/world/level/storage/loot/LootContext$Builder random Lnet/minecraft/util/RandomSource;
+accessible method net/minecraft/world/level/storage/loot/parameters/LootContextParamSets register (Ljava/lang/String;Ljava/util/function/Consumer;)Lnet/minecraft/world/level/storage/loot/parameters/LootContextParamSet;

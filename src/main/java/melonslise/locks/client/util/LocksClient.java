@@ -31,6 +31,9 @@ import org.joml.Quaternionf;
 import java.util.List;
 
 public class LocksClient {
+    private static final Quaternionf ROTATE_X_90 = new Quaternionf().rotateX(Mth.DEG_TO_RAD * 90f);
+    private static final Quaternionf ROTATE_Y_WEST_EAST = new Quaternionf().rotateY(1.6f);
+    private static final Quaternionf ROTATE_X_45 = new Quaternionf().rotateX(Mth.DEG_TO_RAD * 45f);
 
     public static Lockable tooltipLockable;
 
@@ -61,14 +64,14 @@ public class LocksClient {
             // For some reason translating by negative player position and then the point coords causes jittering in very big z and x coords. Why? Thus we use 1 translation instead
             mtx.translate(state.pos.x - o.x, state.pos.y - o.y, state.pos.z - o.z);
             //mtx.mulPose(new Quaternionf().rotateY(-state.tr.dir.toYRot() - 90));
-            // FIXME 3 FUCKING QUATS PER FRAME !!! WHAT THE FUUUUUUCK!!!!!!!!!!!
+
             if (state.tr.face == AttachFace.CEILING) {
-                mtx.mulPose(new Quaternionf().rotateX(90f));
+                mtx.mulPose(ROTATE_X_90);
             } else if (state.tr.dir == Direction.WEST || state.tr.dir == Direction.EAST) {
-                mtx.mulPose(new Quaternionf().rotateY(1.6f));
+                mtx.mulPose(ROTATE_Y_WEST_EAST);
             }
             if (state.tr.face == AttachFace.FLOOR) {
-                mtx.mulPose(new Quaternionf().rotateX(45f));
+                mtx.mulPose(ROTATE_X_45);
             }
 
             mtx.translate(0d, 0.1d, 0d);

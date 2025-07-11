@@ -146,7 +146,7 @@ public final class LocksEvents
 			Lockable[] match = Arrays.stream(intersect).filter(LocksPredicates.NOT_LOCKED).toArray(Lockable[]::new);
 			if(match.length == 0)
 				return InteractionResult.PASS;
-			world.playSound(player, pos, SoundEvents.IRON_DOOR_OPEN, SoundSource.BLOCKS, 0.8f, 0.8f + world.random.nextFloat() * 0.4f);
+			world.playSound(player, pos, SoundEvents.IRON_DOOR_OPEN, SoundSource.BLOCKS, 0.8f, 0.8f + player.getRandom().nextFloat() * 0.4f);
 			player.swing(InteractionHand.MAIN_HAND);
 			if(player instanceof ServerPlayer) {
 				Locks.LOGGER.info("Removing lockable");

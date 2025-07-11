@@ -154,8 +154,7 @@ public class LockPickingContainer extends AbstractContainerMenu
 		float sturdyModifier = this.sturdy == 0 ? 1f : 0.75f + this.sturdy * 0.5f;
 		float ch = LockPickItem.getOrSetStrength(pickStack) / sturdyModifier;
 		float ex = (1f - ch) * (1f - this.getBreakChanceMultiplier(pin));
-
-		if (!pickStack.is(LocksItemTags.LOCK_PICKS) || player.level().random.nextFloat() < ex + ch)
+		if (!pickStack.is(LocksItemTags.LOCK_PICKS) || player.getRandom().nextFloat() < ex + ch)
 			return false;
 		this.player.broadcastBreakEvent(this.hand);
 		pickStack.shrink(1);

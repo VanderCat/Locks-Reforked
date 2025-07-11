@@ -14,7 +14,7 @@ java {
 
 repositories {
 	maven {
-		url = "https://www.cursemaven.com"
+		url = "https://cursemaven.com"
 	}
 	maven {
 		name = 'Ladysnake Mods'
@@ -23,7 +23,7 @@ repositories {
 	maven { url "https://maven.siphalor.de/"}
 	maven { url "https://maven.shedaniel.me/" } // REI repository
 	maven { url "https://maven.blamejared.com/" } // JEI repository
-	maven { url "https://api.modrinth.com/maven" } //Modrinth stuff
+	//maven { url "https://api.modrinth.com/maven" } //Modrinth stuff
 	maven { url "https://maven.terraformersmc.com/releases/" }
 }
 
@@ -61,6 +61,8 @@ dependencies {
 	modImplementation "mezz.jei:jei-1.20.1-fabric:15.3.0.5"
 	modImplementation "curse.maven:lootr-fabric-615106:5639247"
 	modImplementation "tschipp.carryon:carryon-fabric-1.20.1:2.1.2.7" 
+	modRuntimeOnly "curse.maven:uwrad-821683:4410962"
+	
 }
 
 processResources {

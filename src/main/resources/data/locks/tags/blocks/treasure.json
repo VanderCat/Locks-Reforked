@@ -1,0 +1,14 @@
+{
+	"replace": false,
+	"values":
+	[
+        {
+            "id": "#lootr:containers",
+            "required": false
+        },
+        "#c:chests",
+		"#c:wooden_barrels",
+        "#c:shulker_boxes",
+        "#minecraft:shulker_boxes"
+    ]
+}
