@@ -10,9 +10,11 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -49,7 +51,10 @@ import static net.minecraft.world.level.block.state.properties.DoubleBlockHalf.L
 public final class LocksUtil {
     public static ResourceManager resourceManager;
 
-    private LocksUtil() {
+    public static boolean canLock(Level world, BlockPos pos) {
+        var block = world.getBlockState(pos);
+        var lockable = TagKey.create(Registries.BLOCK, new ResourceLocation("locks:lockable"));
+        return block.is(lockable);
     }
 
     public static void shuffle(byte[] array, Random rng) {

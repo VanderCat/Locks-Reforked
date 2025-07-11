@@ -2,12 +2,13 @@ package melonslise.locks.client.util;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
+import melonslise.locks.Locks;
 import melonslise.locks.client.init.LocksRenderTypes;
 import melonslise.locks.common.components.interfaces.ISelection;
-import melonslise.locks.common.config.LocksServerConfig;
 import melonslise.locks.common.init.LocksComponents;
 import melonslise.locks.common.init.LocksItemTags;
 import melonslise.locks.common.util.Lockable;
+import melonslise.locks.common.util.LocksUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.renderer.GameRenderer;
@@ -104,7 +105,7 @@ public class LocksClient {
         if (pos == null)
             return;
         BlockPos pos1 = mc.hitResult instanceof BlockHitResult ? ((BlockHitResult) mc.hitResult).getBlockPos() : pos;
-        boolean allow = Math.abs(pos.getX() - pos1.getX()) * Math.abs(pos.getY() - pos1.getY()) * Math.abs(pos.getZ() - pos1.getZ()) <= LocksServerConfig.MAX_LOCKABLE_VOLUME.get() && LocksServerConfig.canLock(mc.level, pos1);
+        boolean allow = Math.abs(pos.getX() - pos1.getX()) * Math.abs(pos.getY() - pos1.getY()) * Math.abs(pos.getZ() - pos1.getZ()) <= Locks.CONFIG.maxLockableVolume() && LocksUtil.canLock(mc.level, pos1);
         // Same as above
         LevelRenderer.renderLineBox(mtx, buf.getBuffer(LocksRenderTypes.OVERLAY_LINES), Math.min(pos.getX(), pos1.getX()) - o.x, Math.min(pos.getY(), pos1.getY()) - o.y, Math.min(pos.getZ(), pos1.getZ()) - o.z, Math.max(pos.getX(), pos1.getX()) + 1d - o.x, Math.max(pos.getY(), pos1.getY()) + 1d - o.y, Math.max(pos.getZ(), pos1.getZ()) + 1d - o.z, allow ? 0f : 1f, allow ? 1f : 0f, 0f, 0.5f);
         RenderSystem.disableDepthTest();

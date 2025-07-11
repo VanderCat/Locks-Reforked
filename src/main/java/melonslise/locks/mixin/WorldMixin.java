@@ -1,6 +1,6 @@
 package melonslise.locks.mixin;
 
-import melonslise.locks.common.config.LocksServerConfig;
+import melonslise.locks.Locks;
 import melonslise.locks.common.util.LocksUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -37,7 +37,7 @@ public abstract class WorldMixin implements SignalGetter {
 
     @Inject(method = "setBlock(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;II)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;getChunkAt(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/chunk/LevelChunk;", shift = At.Shift.BEFORE), cancellable = true)
     public void strongCheck(BlockPos pPos, BlockState pState, int pFlags, int pRecursionLeft, CallbackInfoReturnable<Boolean> cir){
-        if (LocksServerConfig.STRONG_PREVENTION.get() && LocksUtil.lockedAndRelated((Level) (Object) this, pPos)){
+        if (Locks.CONFIG.strongPrevention() && LocksUtil.lockedAndRelated((Level) (Object) this, pPos)){
             cir.setReturnValue(false);
         }
     }

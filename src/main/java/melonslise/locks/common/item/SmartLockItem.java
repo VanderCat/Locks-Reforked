@@ -2,14 +2,10 @@ package melonslise.locks.common.item;
 
 import melonslise.locks.Locks;
 import melonslise.locks.common.components.interfaces.ILockableHandler;
-import melonslise.locks.common.components.interfaces.ISelection;
-import melonslise.locks.common.config.LocksServerConfig;
+import melonslise.locks.common.components.interfaces.ISelection;;
 import melonslise.locks.common.init.LocksComponents;
 import melonslise.locks.common.init.LocksSoundEvents;
-import melonslise.locks.common.util.Cuboid6i;
-import melonslise.locks.common.util.Lock;
-import melonslise.locks.common.util.Lockable;
-import melonslise.locks.common.util.Transform;
+import melonslise.locks.common.util.*;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.ChatFormatting;
@@ -68,9 +64,9 @@ public class SmartLockItem extends LockingItem
 	{
 		Level world = ctx.getLevel();
 		BlockPos pos = ctx.getClickedPos();
-		if (!LocksServerConfig.canLock(world, pos) ||  LocksComponents.LOCKABLE_HANDLER.get(ctx.getLevel()).getInChunk(pos).values().stream().anyMatch(lkb -> lkb.bb.intersects(pos)))
+		if (!LocksUtil.canLock(world, pos) ||  LocksComponents.LOCKABLE_HANDLER.get(ctx.getLevel()).getInChunk(pos).values().stream().anyMatch(lkb -> lkb.bb.intersects(pos)))
 			return InteractionResult.PASS;
-		return LocksServerConfig.EASY_LOCK.get() ? this.easyLock(ctx) : this.freeLock(ctx);
+		return Locks.CONFIG.easyLock() ? this.easyLock(ctx) : this.freeLock(ctx);
 	}
 
 	private static boolean prevState = false;

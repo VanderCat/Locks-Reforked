@@ -5,7 +5,6 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import melonslise.locks.Locks;
 import melonslise.locks.common.components.interfaces.ILockableHandler;
 import melonslise.locks.common.components.interfaces.ILockableStorage;
-import melonslise.locks.common.config.LocksServerConfig;
 import melonslise.locks.common.init.LocksComponents;
 import melonslise.locks.common.network.toclient.AddLockablePacket;
 import melonslise.locks.common.network.toclient.RemoveLockablePacket;
@@ -70,7 +69,7 @@ public class LockableHandler implements ILockableHandler {
     @Override
     public boolean add(Lockable lkb,Level level)
     {
-        if(lkb.bb.volume() > LocksServerConfig.MAX_LOCKABLE_VOLUME.get())
+        if(lkb.bb.volume() > Locks.CONFIG.maxLockableVolume())
             return false;
         List<ILockableStorage> sts = lkb.bb.containedChunksTo((x, z) ->
         {

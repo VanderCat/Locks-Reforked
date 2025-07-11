@@ -1,11 +1,7 @@
 package melonslise.locks.common.event;
 
-import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import melonslise.locks.Locks;
-import melonslise.locks.common.components.LockableHandler;
 import melonslise.locks.common.components.interfaces.ILockableHandler;
-import melonslise.locks.common.config.LocksClientConfig;
-import melonslise.locks.common.config.LocksServerConfig;
 import melonslise.locks.common.container.LockPickingContainer;
 import melonslise.locks.common.init.LocksComponents;
 import melonslise.locks.common.init.LocksItemTags;
@@ -42,7 +38,6 @@ import net.minecraft.world.level.storage.loot.LootDataManager;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
-import net.minecraft.world.level.chunk.LevelChunk;
 
 import java.util.Arrays;
 import java.util.Optional;
@@ -126,7 +121,7 @@ public final class LocksEvents
 
 			if(!(player instanceof ServerPlayer)) return InteractionResult.PASS;
 
-			if(world.isClientSide && LocksClientConfig.DEAF_MODE.get()) player.displayClientMessage(LOCKED_MESSAGE, true);
+			if(world.isClientSide && Locks.CONFIG.deafMode()) player.displayClientMessage(LOCKED_MESSAGE, true);
 
 			// Avoids rendering when it is opened with a key while standing
 			if(!lkb.isSmart() && player.isShiftKeyDown() && hasMatchingKey(lkb, stack, player)) { return InteractionResult.PASS; }
@@ -141,7 +136,7 @@ public final class LocksEvents
 				return InteractionResult.FAIL;
 		}
 
-		if(LocksServerConfig.ALLOW_REMOVING_LOCKS.get() && player.isShiftKeyDown() && stack.isEmpty())
+		if(Locks.CONFIG.allowRemovingLocks() && player.isShiftKeyDown() && stack.isEmpty())
 		{
 			Lockable[] match = Arrays.stream(intersect).filter(LocksPredicates.NOT_LOCKED).toArray(Lockable[]::new);
 			if(match.length == 0)
@@ -195,7 +190,7 @@ public final class LocksEvents
 
 	public static boolean canBreakLockable(Level world,Player player, BlockPos pos)
 	{
-		return (LocksServerConfig.PROTECT_LOCKABLES.get() &&
+		return (Locks.CONFIG.protectLockables() &&
 				!player.isCreative() &&
 				LocksUtil.lockedAndRelated(world, pos));
 	}

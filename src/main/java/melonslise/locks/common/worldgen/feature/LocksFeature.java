@@ -7,7 +7,6 @@ import melonslise.locks.common.components.LockableHandler;
 import melonslise.locks.common.components.interfaces.ILockableHandler;
 import melonslise.locks.common.components.interfaces.ILockableStorage;
 import melonslise.locks.common.config.LocksConfig;
-import melonslise.locks.common.config.LocksServerConfig;
 import melonslise.locks.common.init.LocksComponents;
 import melonslise.locks.common.init.LocksLootParamSets;
 import melonslise.locks.common.network.toclient.AddLockablePacket;
@@ -132,7 +131,7 @@ public class LocksFeature extends Feature<NoneFeatureConfiguration> {
         Transform tr = Transform.fromDirection(dir, dir);
         var lkb = new Lockable(bb, lock, tr, stack, level.getLevel());
         LockableHandler handler = (LockableHandler)LocksComponents.LOCKABLE_HANDLER.get(level.getLevel());
-        if(lkb.bb.volume() > LocksServerConfig.MAX_LOCKABLE_VOLUME.get())
+        if(lkb.bb.volume() > Locks.CONFIG.maxLockableVolume())
             return false;
         List<ILockableStorage> sts = lkb.bb.containedChunksTo((x, z) ->
         {

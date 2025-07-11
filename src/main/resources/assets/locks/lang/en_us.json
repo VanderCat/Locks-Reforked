@@ -53,5 +53,30 @@
 	"locks.tooltip.owner": "Owner: %s",
 
 	"locks.status.locked": "This block is locked",
-	"locks.status.too_complex": "This lock is too complex for this lock pick"
+	"locks.status.too_complex": "This lock is too complex for this lock pick",
+
+	"text.config.locks.section.client": "Client",
+
+	"text.config.locks.option.deafMode": "Deaf Mode",
+	"text.config.locks.option.deafMode.tooltip": "Display visual feedback when trying to use a locked block for certain hearing impaired individuals",
+	"text.config.locks.option.overlay": "Show Overlay",
+	"text.config.locks.option.overlay.tooltip": "Whether or not to display the lock's information overlay when holding the lock picker",
+
+	"text.config.locks.section.generation": "Generation",
+
+	"text.config.locks.option.randomizeLoadedLocks": "Randomize Loaded Locks",
+	"text.config.locks.option.randomizeLoadedLocks.tooltip": "Randomize lock IDs and combinations when loading them from a structure file. Randomization works just like during world generation",
+
+	"text.config.locks.section.server": "Server",
+
+	"text.config.locks.option.maxLockableVolume": "Max Lockable Volume",
+	"text.config.locks.option.maxLockableVolume.tooltip": "Maximum amount of blocks that can be locked at once",
+	"text.config.locks.option.allowRemovingLocks": "Allow Removing Locks",
+	"text.config.locks.option.allowRemovingLocks.tooltip": "Open locks can be removed with an empty hand while sneaking",
+	"text.config.locks.option.protectLockables": "Protect Lockables",
+	"text.config.locks.option.protectLockables.tooltip": "Locked blocks cannot be destroyed in survival mode",
+	"text.config.locks.option.easyLock": "Easy Lock",
+	"text.config.locks.option.easyLock.tooltip": "Lock blocks with just one click! It's magic! (Cancel will probably fail spectacularly with custom doors, custom double chests, etc)",
+	"text.config.locks.option.strongPrevention": "Stronger Prevention",
+	"text.config.locks.option.strongPrevention.tooltip": "Use stronger checks to prevent blocks on locks from being broken, but its compatibility is unknown"
 }

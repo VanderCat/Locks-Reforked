@@ -1,27 +1,27 @@
 package melonslise.locks;
 
-import fuzs.forgeconfigapiport.api.config.v2.ForgeConfigRegistry;
+import melonslise.locks.client.init.LocksItemModelsProperties;
+import melonslise.locks.client.init.LocksNetworkClient;
+import melonslise.locks.client.init.LocksScreens;
 import melonslise.locks.common.config.LocksConfig;
-import melonslise.locks.common.config.LocksServerConfig;
 import melonslise.locks.common.event.LocksEvents;
 import melonslise.locks.common.init.*;
+import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
-import net.minecraftforge.fml.config.ModConfig.Type;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
  * MOD init and registration.
  */
-public final class Locks implements ModInitializer
-{
+public final class Locks implements ModInitializer, ClientModInitializer {
+	public static final LocksConfig CONFIG = LocksConfig.createAndLoad();
 	public static final String ID = "locks";
 
 	public static final Logger LOGGER = LogManager.getLogger("Locks");
 
 	@Override
 	public void onInitialize() {
-
 		//EnumModifier.run();
 		//TODO: run the EnumModifier class to add enchantments to the game
 		LocksItems.register();
@@ -34,7 +34,12 @@ public final class Locks implements ModInitializer
 		LocksNetwork.register();
 		LocksFeatures.register();
 		LocksLootParamSets.register();
-		ForgeConfigRegistry.INSTANCE.register(ID, Type.COMMON, LocksConfig.SPEC);
-		ForgeConfigRegistry.INSTANCE.register(ID, Type.SERVER, LocksServerConfig.SPEC);
+	}
+
+	@Override
+	public void onInitializeClient() {
+		LocksScreens.register();
+		LocksItemModelsProperties.register();
+		LocksNetworkClient.register();
 	}
 }
