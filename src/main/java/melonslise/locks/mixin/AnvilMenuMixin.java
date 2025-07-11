@@ -28,7 +28,7 @@ public abstract class AnvilMenuMixin {
         if (!left.isEmpty() && !right.isEmpty()) {
             if (left.is(LocksItems.NETHERITE_LOCK) && right.is(LocksItems.INTEGRATED_CIRCUIT)) {
 
-                ItemStack result = new ItemStack(LocksItems.NETHERITE_SMART_LOCK);
+                ItemStack result = new ItemStack(LocksItems.SMART_NETHERITE_LOCK);
 
                 // Copy NBT data
                 if (left.hasTag()) {

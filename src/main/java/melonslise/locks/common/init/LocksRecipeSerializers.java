@@ -1,5 +1,6 @@
 package melonslise.locks.common.init;
 
+import io.wispforest.owo.registration.reflect.AutoRegistryContainer;
 import melonslise.locks.Locks;
 import melonslise.locks.common.recipe.KeyRecipe;
 import net.minecraft.core.Registry;
@@ -8,18 +9,19 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
+import net.minecraft.world.item.enchantment.Enchantment;
 
-public final class LocksRecipeSerializers
-{
+public final class LocksRecipeSerializers implements AutoRegistryContainer<RecipeSerializer<?>> {
+	public static final RecipeSerializer<KeyRecipe> CRAFTING_KEY = new SimpleCraftingRecipeSerializer<>(KeyRecipe::new);
 
-	public static final RecipeSerializer<KeyRecipe> KEY = add("crafting_key", new SimpleCraftingRecipeSerializer<>(KeyRecipe::new));
-
-	public static void register()
-	{
+	@Override
+	public Registry<RecipeSerializer<?>> getRegistry() {
+		return BuiltInRegistries.RECIPE_SERIALIZER;
 	}
 
-	public static <T extends Recipe<?>> RecipeSerializer<T> add(String name, RecipeSerializer<T> serializer)
-	{
-		return Registry.register(BuiltInRegistries.RECIPE_SERIALIZER,new ResourceLocation(Locks.ID,name),serializer);
+	@SuppressWarnings("unchecked")
+    @Override
+	public Class<RecipeSerializer<?>> getTargetFieldType() {
+		return (Class<RecipeSerializer<?>>) (Object) RecipeSerializer.class;
 	}
 }

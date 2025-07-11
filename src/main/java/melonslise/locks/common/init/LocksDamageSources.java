@@ -8,13 +8,10 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.level.Level;
 
-public final class LocksDamageSources
-{
+public final class LocksDamageSources {
 	public static final ResourceKey<DamageType> SHOCK = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(Locks.ID, "shock"));
 
 	public static DamageSource getDamageSource(Level level, ResourceKey<DamageType> type) {
 		return new DamageSource(level.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(type));
 	}
-
-	private LocksDamageSources() {}
 }

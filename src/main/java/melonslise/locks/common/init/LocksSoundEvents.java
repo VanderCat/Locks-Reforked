@@ -6,8 +6,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 
-public final class LocksSoundEvents
-{
+public final class LocksSoundEvents {
 	public static final SoundEvent
 		KEY_RING = add("key_ring"),
 		LOCK_CLOSE = add("lock.close"),
@@ -17,14 +16,9 @@ public final class LocksSoundEvents
 		PIN_MATCH = add("pin.match"),
 		SHOCK = add("shock");
 
-	private LocksSoundEvents() {}
+	public static void register() {}
 
-	public static void register()
-	{
-	}
-
-	public static SoundEvent add(String name)
-	{
+	public static SoundEvent add(String name) {
 	 	return Registry.register(BuiltInRegistries.SOUND_EVENT, new ResourceLocation(Locks.ID, name), SoundEvent.createVariableRangeEvent(new ResourceLocation(Locks.ID, name)));
 	}
 }

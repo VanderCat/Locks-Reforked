@@ -11,10 +11,7 @@ import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 
-public final class LocksContainerTypes
-{
-
-
+public final class LocksContainerTypes {
 	public static final ExtendedScreenHandlerType<LockPickingContainer>
 			LOCK_PICKING = new ExtendedScreenHandlerType<>(LockPickingContainer.FACTORY);
 
@@ -27,11 +24,7 @@ public final class LocksContainerTypes
 	public static final MenuType<KeyRingContainer>
 			KEY_RING_TYPE= add("key_ring", KEY_RING);
 
-	private LocksContainerTypes() {}
-
-	public static void register()
-	{
-	}
+	public static void register() {}
 
 	public static <T extends AbstractContainerMenu> MenuType<T> add(String name, MenuType<T> type)
 	{

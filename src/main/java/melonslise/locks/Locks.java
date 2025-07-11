@@ -1,5 +1,6 @@
 package melonslise.locks;
 
+import io.wispforest.owo.registration.reflect.FieldRegistrationHandler;
 import melonslise.locks.client.init.LocksItemModelsProperties;
 import melonslise.locks.client.init.LocksNetworkClient;
 import melonslise.locks.client.init.LocksScreens;
@@ -24,11 +25,12 @@ public final class Locks implements ModInitializer, ClientModInitializer {
 	public void onInitialize() {
 		//EnumModifier.run();
 		//TODO: run the EnumModifier class to add enchantments to the game
-		LocksItems.register();
-		LocksEnchantments.register();
+		FieldRegistrationHandler.register(LocksItems.class, ID, false);
+		LocksItems.GROUP.initialize();
+		FieldRegistrationHandler.register(LocksEnchantments.class, ID, false);
 		LocksSoundEvents.register();
 		LocksContainerTypes.register();
-		LocksRecipeSerializers.register();
+		FieldRegistrationHandler.register(LocksRecipeSerializers.class, ID, false);
 		LocksVillagerTrades.register();
 		LocksEvents.register();
 		LocksNetwork.register();

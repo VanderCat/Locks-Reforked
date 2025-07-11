@@ -23,7 +23,7 @@ public class KeyRecipe extends CustomRecipe
 	@Override
 	public RecipeSerializer<?> getSerializer()
 	{
-		return LocksRecipeSerializers.KEY;
+		return LocksRecipeSerializers.CRAFTING_KEY;
 	}
 
 	@Override

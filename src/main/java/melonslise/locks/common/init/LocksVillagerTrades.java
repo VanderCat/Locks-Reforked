@@ -10,9 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class LocksVillagerTrades {
-
-    public static void addVillagerTrades()
-    {
+    public static void addVillagerTrades() {
         Int2ObjectMap<VillagerTrades.ItemListing[]> levels = VillagerTrades.TRADES.get(VillagerProfession.TOOLSMITH);
         List<VillagerTrades.ItemListing> trades;
         trades = new ArrayList<>(List.of(levels.get(1)));
@@ -37,8 +35,7 @@ public class LocksVillagerTrades {
         VillagerTrades.TRADES.put(VillagerProfession.TOOLSMITH, levels);
     }
 
-    public static void addWandererTrades()
-    {
+    public static void addWandererTrades() {
         Int2ObjectMap<VillagerTrades.ItemListing[]> wanderingTraderTrades = VillagerTrades.WANDERING_TRADER_TRADES;
         List<VillagerTrades.ItemListing> trades = new ArrayList<>(Arrays.stream(wanderingTraderTrades.get(1)).toList());
         trades.add(new VillagerTrades.ItemsForEmeralds(LocksItems.GOLD_LOCK_PICK, 5, 2, 6, 1));

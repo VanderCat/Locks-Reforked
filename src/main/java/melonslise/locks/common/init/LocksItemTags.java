@@ -5,10 +5,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 
-public final class LocksItemTags
-{
-	private LocksItemTags() {}
-
+public final class LocksItemTags {
 	public static final TagKey<Item>
 		KEYS = bind("keys"),
 		LOCKS = bind("locks"),

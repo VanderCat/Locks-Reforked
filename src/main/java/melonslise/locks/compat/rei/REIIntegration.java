@@ -7,23 +7,16 @@ import melonslise.locks.common.init.LocksItems;
 import net.fabricmc.loader.api.FabricLoader;
 
 import me.shedaniel.rei.api.client.registry.display.DisplayRegistry;
-import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import net.minecraft.core.Holder;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import me.shedaniel.rei.api.common.entry.EntryStack;
-import me.shedaniel.rei.api.common.entry.type.VanillaEntryTypes;
 import me.shedaniel.rei.plugin.common.displays.anvil.AnvilRecipe;
 import me.shedaniel.rei.plugin.common.displays.crafting.DefaultCustomShapelessDisplay;
 import net.minecraft.resources.ResourceLocation;
-import me.shedaniel.rei.api.common.entry.EntryIngredient;
 
 import java.util.Arrays;
 import java.util.Collections;
 
-import net.minecraft.network.chat.Component;
-import me.shedaniel.rei.api.client.gui.widgets.Tooltip;
 import net.minecraft.world.item.crafting.Ingredient;
 
 import java.util.List;
@@ -36,7 +29,7 @@ public class REIIntegration {
     public static void registerDisplays(DisplayRegistry registry) {
         ItemStack leftStack = new ItemStack(LocksItems.NETHERITE_LOCK);
         ItemStack rightStack = new ItemStack(LocksItems.INTEGRATED_CIRCUIT);
-        ItemStack outputStack = new ItemStack(LocksItems.NETHERITE_SMART_LOCK);
+        ItemStack outputStack = new ItemStack(LocksItems.SMART_NETHERITE_LOCK);
 
 
         // Create recipe with proper parameters

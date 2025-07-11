@@ -1,30 +1,29 @@
 package melonslise.locks.common.init;
 
+import io.wispforest.owo.registration.reflect.AutoRegistryContainer;
 import melonslise.locks.Locks;
 import melonslise.locks.common.enchantment.ComplexityEnchantment;
 import melonslise.locks.common.enchantment.ShockingEnchantment;
 import melonslise.locks.common.enchantment.SturdyEnchantment;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.enchantment.Enchantment;
 
-public final class LocksEnchantments
-{
-
+public final class LocksEnchantments implements AutoRegistryContainer<Enchantment> {
 	public static final Enchantment
-		SHOCKING = add("shocking", new ShockingEnchantment()),
-		STURDY = add("sturdy", new SturdyEnchantment()),
-		COMPLEXITY = add("complexity", new ComplexityEnchantment());
+		SHOCKING = new ShockingEnchantment(),
+		STURDY = new SturdyEnchantment(),
+		COMPLEXITY = new ComplexityEnchantment();
 
-	private LocksEnchantments() {}
-
-	public static void register()
-	{
+	@Override
+	public Registry<Enchantment> getRegistry() {
+		return BuiltInRegistries.ENCHANTMENT;
 	}
 
-	public static Enchantment add(String name, Enchantment ench)
-	{
-		return Registry.register(BuiltInRegistries.ENCHANTMENT,new ResourceLocation(Locks.ID,name),ench);
+	@Override
+	public Class<Enchantment> getTargetFieldType() {
+		return Enchantment.class;
 	}
 }

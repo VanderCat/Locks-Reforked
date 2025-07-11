@@ -15,7 +15,6 @@ import net.minecraft.resources.ResourceKey;
 
 
 public class LocksFeatures {
-
     public static final LocksFeature LOCK = Registry.register(BuiltInRegistries.FEATURE, new ResourceLocation(Locks.ID, "lock"), new LocksFeature(NoneFeatureConfiguration.CODEC));
 
     public static final void register() {

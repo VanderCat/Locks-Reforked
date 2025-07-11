@@ -22,7 +22,7 @@ public class LocksJeiPlugin implements IModPlugin {
     public void registerRecipes(IRecipeRegistration registration) {
         List<ItemStack> leftInputs = List.of(new ItemStack(LocksItems.NETHERITE_LOCK));
         List<ItemStack> rightInputs = List.of(new ItemStack(LocksItems.INTEGRATED_CIRCUIT));
-        List<ItemStack> outputs = List.of(new ItemStack(LocksItems.NETHERITE_SMART_LOCK));
+        List<ItemStack> outputs = List.of(new ItemStack(LocksItems.SMART_NETHERITE_LOCK));
         ResourceLocation UID = new ResourceLocation("locks", "netherite_smart_lock_upgrade");
 
         //Safe way to register the recipe
