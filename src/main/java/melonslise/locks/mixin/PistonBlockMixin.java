@@ -18,7 +18,7 @@ public class PistonBlockMixin
 	@Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;getPistonPushReaction()Lnet/minecraft/world/level/material/PushReaction;"), method = "isPushable", cancellable = true)
 	private static void isPushable(BlockState state, Level world, BlockPos pos, Direction dir, boolean flag, Direction dir1, CallbackInfoReturnable<Boolean> cir)
 	{
-		if(LocksUtil.lockedAndRelated(world, pos))
-			cir.setReturnValue(false);
+//		if(LocksUtil.lockedAndRelated(world, pos))
+//			cir.setReturnValue(false);
 	}
 }

@@ -15,8 +15,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class DoorMixin {
     @Inject(method = "setOpen", at = @At(value = "HEAD"), cancellable = true)
     private void cancelOpen(Entity pEntity, Level pLevel, BlockState pState, BlockPos pPos, boolean pOpen, CallbackInfo ci){
-        if (LocksUtil.locked(pLevel, pPos)){
-            ci.cancel();
-        }
+//        if (LocksUtil.locked(pLevel, pPos)){
+//            ci.cancel();
+//        }
     }
 }

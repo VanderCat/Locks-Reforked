@@ -16,9 +16,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(StructurePiece.class)
-public abstract class StructurePieceMixin {
-
+//@Mixin(StructurePiece.class)
+//public abstract class StructurePieceMixin {
+//
 //    @Inject(method = "placeBlock", at = @At(value = "TAIL"))
 //    public void lockPlace(WorldGenLevel level, BlockState blockState, int x, int y, int z, BoundingBox boundingBox, CallbackInfo ci) {
 //        LocksUtil.lockChunk(level, level.getLevel(), new BlockPos(x, y, z), RandomSource.create());
@@ -33,4 +33,4 @@ public abstract class StructurePieceMixin {
 //    public void lockDispenser(WorldGenLevel level, BoundingBox boundingBox, RandomSource randomSource, int x, int y, int z, Direction direction, ResourceLocation resourceLocation, CallbackInfoReturnable<Boolean> cir) {
 //        LocksUtil.lockChunk(level, level.getLevel(), new BlockPos(x, y, z), RandomSource.create());
 //    }
-}
+//}

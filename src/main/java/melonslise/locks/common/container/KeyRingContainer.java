@@ -64,17 +64,16 @@ public class KeyRingContainer extends AbstractContainerMenu
 	}
 
 
-
 	public final ItemStack stack;
 	public final IItemHandler inv;
 	public final int rows;
 	public final KeyRingInventory container;
 
-	public KeyRingContainer(int id, Player player, ItemStack stack)
-	{
+	public KeyRingContainer(int id, Player player, ItemStack stack) {
+		//FIXME:
 		super(LocksContainerTypes.KEY_RING, id);
 		this.stack = stack;
-		this.inv = LocksComponents.ITEM_HANDLER.get(stack);
+		this.inv = null;// LocksComponents.ITEM_HANDLER.get(stack);
 		this.rows = 1;
 		container = new KeyRingInventory(stack, 9);
 

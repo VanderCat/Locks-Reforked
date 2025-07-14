@@ -28,16 +28,16 @@ public class RandomizableContainerBlockEntityMixin
     private void lockRandomizableContainerBlockEntity(int slot, CallbackInfoReturnable<ItemStack> cir) {
 
         //Fixing some supplementaries hourglass generation bug 
-        BlockPos pos = ((BaseContainerBlockEntity) (Object) this).getBlockPos();
-        Level level = ((BaseContainerBlockEntity) (Object) this).getLevel();
-        if (level == null)
-        {
-            Locks.LOGGER.warn("Tried to access RandomizableContainerBlockEntity before level was initialized.");
-            return;
-        }
-        if (level.isClientSide) return;
-        if (LocksUtil.locked(level, pos)){
-            cir.setReturnValue(Items.AIR.getDefaultInstance());
-        }
+//        BlockPos pos = ((BaseContainerBlockEntity) (Object) this).getBlockPos();
+//        Level level = ((BaseContainerBlockEntity) (Object) this).getLevel();
+//        if (level == null)
+//        {
+//            Locks.LOGGER.warn("Tried to access RandomizableContainerBlockEntity before level was initialized.");
+//            return;
+//        }
+//        if (level.isClientSide) return;
+//        if (LocksUtil.locked(level, pos)){
+//            cir.setReturnValue(Items.AIR.getDefaultInstance());
+//        }
     }
 }

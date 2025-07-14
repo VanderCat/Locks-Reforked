@@ -53,6 +53,7 @@ dependencies {
 	modImplementation include("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${project.cca_version}")
 	modImplementation include("dev.onyxstudios.cardinal-components-api:cardinal-components-world:${project.cca_version}")
 	modImplementation include("dev.onyxstudios.cardinal-components-api:cardinal-components-chunk:${project.cca_version}")
+	modImplementation include("dev.onyxstudios.cardinal-components-api:cardinal-components-block:${project.cca_version}")
 
 	modCompileOnly "me.shedaniel:RoughlyEnoughItems-fabric:12.0.613"
 	modImplementation "mezz.jei:jei-1.20.1-fabric:15.3.0.5"

@@ -48,10 +48,7 @@
 	},
 	"custom": {
 		"cardinal-components": [
-			"locks:lockable_handler",
-			"locks:lockable_storage",
-			"locks:selection",
-			"locks:item_handler"
+			"locks:locked"
 		]
 	}
 }

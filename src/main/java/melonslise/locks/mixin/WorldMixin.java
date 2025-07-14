@@ -17,9 +17,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class WorldMixin implements SignalGetter {
     @Override
     public boolean hasNeighborSignal(@NotNull BlockPos pPos) {
-        if (LocksUtil.locked((Level) (Object) this, pPos)) {
-            return false;
-        }
+//        if (LocksUtil.locked((Level) (Object) this, pPos)) {
+//            return false;
+//        }
         if (this.getSignal(pPos.below(), Direction.DOWN) > 0) {
             return true;
         } else if (this.getSignal(pPos.above(), Direction.UP) > 0) {
@@ -37,8 +37,8 @@ public abstract class WorldMixin implements SignalGetter {
 
     @Inject(method = "setBlock(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;II)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;getChunkAt(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/chunk/LevelChunk;", shift = At.Shift.BEFORE), cancellable = true)
     public void strongCheck(BlockPos pPos, BlockState pState, int pFlags, int pRecursionLeft, CallbackInfoReturnable<Boolean> cir){
-        if (Locks.CONFIG.strongPrevention() && LocksUtil.lockedAndRelated((Level) (Object) this, pPos)){
-            cir.setReturnValue(false);
-        }
+//        if (Locks.CONFIG.strongPrevention() && LocksUtil.lockedAndRelated((Level) (Object) this, pPos)){
+//            cir.setReturnValue(false);
+//        }
     }
 }

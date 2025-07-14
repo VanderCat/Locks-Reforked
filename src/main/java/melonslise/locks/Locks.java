@@ -2,11 +2,11 @@ package melonslise.locks;
 
 import io.wispforest.owo.registration.reflect.FieldRegistrationHandler;
 import melonslise.locks.client.init.LocksItemModelsProperties;
-import melonslise.locks.client.init.LocksNetworkClient;
 import melonslise.locks.client.init.LocksScreens;
 import melonslise.locks.common.config.LocksConfig;
 import melonslise.locks.common.event.LocksEvents;
 import melonslise.locks.common.init.*;
+import melonslise.locks.common.network.LocksNetwork;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
 import org.apache.logging.log4j.LogManager;
@@ -33,7 +33,7 @@ public final class Locks implements ModInitializer, ClientModInitializer {
 		FieldRegistrationHandler.register(LocksRecipeSerializers.class, ID, false);
 		LocksVillagerTrades.register();
 		LocksEvents.register();
-		LocksNetwork.register();
+		LocksNetwork.registerServerbound();
 		LocksFeatures.register();
 		LocksLootParamSets.register();
 	}
@@ -42,6 +42,6 @@ public final class Locks implements ModInitializer, ClientModInitializer {
 	public void onInitializeClient() {
 		LocksScreens.register();
 		LocksItemModelsProperties.register();
-		LocksNetworkClient.register();
+		LocksNetwork.registerClientbound();
 	}
 }

@@ -7,7 +7,6 @@
 		"locks:steel_lock",
 		"locks:gold_lock",
 		"locks:diamond_lock",
-		"locks:netherite_lock",
-		"locks:smart_netherite_lock"
+		"locks:netherite_lock"
 	]
 }

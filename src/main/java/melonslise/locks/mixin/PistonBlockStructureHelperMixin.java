@@ -21,7 +21,7 @@ public class PistonBlockStructureHelperMixin
 	@Inject(at = @At("HEAD"), method = "resolve()Z", cancellable = true)
 	private void resolve(CallbackInfoReturnable<Boolean> cir)
 	{
-		if(LocksUtil.lockedAndRelated(this.level, this.startPos))
-			cir.setReturnValue(false);
+//		if(LocksUtil.lockedAndRelated(this.level, this.startPos))
+//			cir.setReturnValue(false);
 	}
 }

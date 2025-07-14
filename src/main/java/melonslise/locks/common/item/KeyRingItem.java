@@ -6,8 +6,6 @@ import java.util.stream.Collectors;
 import melonslise.locks.common.container.KeyRingContainer;
 import melonslise.locks.common.container.KeyRingInventory;
 import melonslise.locks.common.init.LocksSoundEvents;
-import melonslise.locks.common.util.Lockable;
-import melonslise.locks.common.util.LocksUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
@@ -77,35 +75,35 @@ public class KeyRingItem extends Item
 	@Override
 	public InteractionResult useOn(UseOnContext ctx)
 	{
-		Level world = ctx.getLevel();
-		BlockPos pos = ctx.getClickedPos();
-		ItemStack stack = ctx.getItemInHand();
-		//IItemHandler inv = LocksComponents.ITEM_HANDLER.get(ctx.getItemInHand());
-
-		//Gets the lock and the keys in the ring.
-		KeyRingInventory ring = new KeyRingInventory(stack, 9);
-		List<Lockable> intersect = LocksUtil.intersecting(world, pos).collect(Collectors.toList());
-		ring.fromTag(stack.getOrCreateTag());
-
-		if(intersect.isEmpty() || ring.isEmpty()) return InteractionResult.PASS;
-
-		for(int a = 0; a < ring.getContainerSize(); ++a)
-		{
-			//Gets id from the key in inventory, checks if the lock matches the key and if so stores it into the "match" List.
-			int id = LockingItem.getOrSetId(ring.getItem(a));
-			List<Lockable> match = LocksUtil.intersecting(world, pos).filter(lkb -> lkb.lock.id == id).collect(Collectors.toList());
-			if(match.isEmpty()) continue;
-
-			world.playSound(ctx.getPlayer(), pos, LocksSoundEvents.LOCK_OPEN, SoundSource.BLOCKS, 1f, 1f);
-
-			/*if(world.isClientSide)
-				return InteractionResult.SUCCESS;*/
-			for(Lockable lkb : match) {
-				lkb.lock.setLocked(!lkb.lock.isLocked());
-				//Locks.LOGGER.warn(lkb.lock.isLocked());
-			}
-			return InteractionResult.SUCCESS;
-		}
+//		Level world = ctx.getLevel();
+//		BlockPos pos = ctx.getClickedPos();
+//		ItemStack stack = ctx.getItemInHand();
+//		//IItemHandler inv = LocksComponents.ITEM_HANDLER.get(ctx.getItemInHand());
+//
+//		//Gets the lock and the keys in the ring.
+//		KeyRingInventory ring = new KeyRingInventory(stack, 9);
+//		List<Lockable> intersect = LocksUtil.intersecting(world, pos).collect(Collectors.toList());
+//		ring.fromTag(stack.getOrCreateTag());
+//
+//		if(intersect.isEmpty() || ring.isEmpty()) return InteractionResult.PASS;
+//
+//		for(int a = 0; a < ring.getContainerSize(); ++a)
+//		{
+//			//Gets id from the key in inventory, checks if the lock matches the key and if so stores it into the "match" List.
+//			int id = LockingItem.getOrSetId(ring.getItem(a));
+//			List<Lockable> match = LocksUtil.intersecting(world, pos).filter(lkb -> lkb.lock.id == id).collect(Collectors.toList());
+//			if(match.isEmpty()) continue;
+//
+//			world.playSound(ctx.getPlayer(), pos, LocksSoundEvents.LOCK_OPEN, SoundSource.BLOCKS, 1f, 1f);
+//
+//			/*if(world.isClientSide)
+//				return InteractionResult.SUCCESS;*/
+//			for(Lockable lkb : match) {
+//				lkb.lock.setLocked(!lkb.lock.isLocked());
+//				//Locks.LOGGER.warn(lkb.lock.isLocked());
+//			}
+//			return InteractionResult.SUCCESS;
+//		}
 		return InteractionResult.SUCCESS;
 	}
 

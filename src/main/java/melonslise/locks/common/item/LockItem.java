@@ -1,7 +1,6 @@
 package melonslise.locks.common.item;
 
 import melonslise.locks.Locks;
-import melonslise.locks.common.components.interfaces.ILockableHandler;
 import melonslise.locks.common.components.interfaces.ISelection;
 import melonslise.locks.common.init.LocksComponents;
 import melonslise.locks.common.init.LocksSoundEvents;
@@ -23,6 +22,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.ChestBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.ChestType;
@@ -31,14 +31,12 @@ import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 
 import java.util.List;
 
-public class LockItem extends LockingItem
-{
+public class LockItem extends LockingItem {
 	public final int length;
 	public final int enchantmentValue;
 	public final int resistance;
 
-	public LockItem(int length, int enchVal, int resist, Properties props)
-	{
+	public LockItem(int length, int enchVal, int resist, Properties props) {
 		super(props);
 		this.length = length;
 		this.enchantmentValue = enchVal;
@@ -58,9 +56,12 @@ public class LockItem extends LockingItem
 		stack.getOrCreateTag().putBoolean(KEY_OPEN, open);
 	}
 
+	public static void toggleOpen(ItemStack stack) {
+		setOpen(stack, !isOpen(stack));
+	}
+
 	// WARNING: EXPECTS LOCKITEM STACK
-	public static byte getOrSetLength(ItemStack stack)
-	{
+	public static byte getOrSetLength(ItemStack stack) {
 		CompoundTag nbt = stack.getOrCreateTag();
 		if(!nbt.contains(KEY_LENGTH))
 			nbt.putByte(KEY_LENGTH, (byte) ((LockItem) stack.getItem()).length);
@@ -74,84 +75,86 @@ public class LockItem extends LockingItem
 	}
 
 	@Override
-	public InteractionResult useOn(UseOnContext ctx)
-	{
-		Level world = ctx.getLevel();
-		BlockPos pos = ctx.getClickedPos();
-		if (!LocksUtil.canLock(world, pos) ||  LocksComponents.LOCKABLE_HANDLER.get(ctx.getLevel()).getInChunk(pos).values().stream().anyMatch(lkb -> lkb.bb.intersects(pos)))
+	public InteractionResult useOn(UseOnContext ctx) {
+		var world = ctx.getLevel();
+		var pos = ctx.getClickedPos();
+		var ent = world.getBlockEntity(pos);
+		if (ent == null)
+			return InteractionResult.FAIL;
+		if (!LocksUtil.canLock(world, pos))
 			return InteractionResult.PASS;
-		return Locks.CONFIG.easyLock()  ? this.easyLock(ctx) : this.freeLock(ctx);
-	}
-
-	public InteractionResult freeLock(UseOnContext ctx)
-	{
-		Player player = ctx.getPlayer();
-		BlockPos pos = ctx.getClickedPos();
-		if(player ==null)
-			return InteractionResult.PASS;
-        ISelection select = LocksComponents.SELECTION.get(player);
-		BlockPos pos1 = select.get();
-		if (pos1 == null)
-			select.set(pos);
-		else
-		{
-			Level world = ctx.getLevel();
-			select.set(null);
-			// FIXME Go through the add checks here as well
-			world.playSound(player, pos, LocksSoundEvents.LOCK_CLOSE, SoundSource.BLOCKS, 1f, 1f);
-			if (world.isClientSide)
-				return InteractionResult.SUCCESS;
-			ItemStack stack = ctx.getItemInHand();
-			ItemStack lockStack = stack.copy();
-			lockStack.setCount(1);
-			ILockableHandler handler = LocksComponents.LOCKABLE_HANDLER.get(world);
-			if (!handler.add(new Lockable(new Cuboid6i(pos1, pos), Lock.from(stack), Transform.fromDirection(ctx.getClickedFace(), player.getDirection().getOpposite()), lockStack, world),world))
-				return InteractionResult.PASS;
-			if (!player.isCreative())
-				stack.shrink(1);
-		}
+		var lock = LocksComponents.LOCKED.get(ent);
+		lock.setLock(ctx.getItemInHand());
+		ctx.getPlayer().getInventory().removeItem(ctx.getItemInHand());
+		LocksComponents.LOCKED.sync(ent);
 		return InteractionResult.SUCCESS;
 	}
 
-	public InteractionResult easyLock(UseOnContext ctx)
-	{
-		Player player = ctx.getPlayer();
-		Level world = ctx.getLevel();
-		BlockPos pos = ctx.getClickedPos();
-		world.playSound(player, pos, LocksSoundEvents.LOCK_CLOSE, SoundSource.BLOCKS, 1f, 1f);
-		if(world.isClientSide) return InteractionResult.SUCCESS;
-		BlockState state = world.getBlockState(pos);
-		BlockPos pos1 = pos;
-		if(state.hasProperty(BlockStateProperties.CHEST_TYPE) && state.getValue(BlockStateProperties.CHEST_TYPE) != ChestType.SINGLE) {
-			pos1 = pos.relative(ChestBlock.getConnectedDirection(state));
-		}
-		else if(state.hasProperty(BlockStateProperties.DOUBLE_BLOCK_HALF))
-		{
-			pos1 = state.getValue(BlockStateProperties.DOUBLE_BLOCK_HALF) == DoubleBlockHalf.LOWER ? pos.above() : pos.below();
-			if(state.hasProperty(BlockStateProperties.DOOR_HINGE) && state.hasProperty(BlockStateProperties.HORIZONTAL_FACING))
-			{
-				Direction dir = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
-				BlockPos pos2 = pos1.relative(state.getValue(BlockStateProperties.DOOR_HINGE) == DoorHingeSide.LEFT ? dir.getClockWise() : dir.getCounterClockWise());
-				if(world.getBlockState(pos2).is(state.getBlock()))
-					pos1 = pos2;
-			}
-		}
-		ItemStack stack = ctx.getItemInHand();
-		ItemStack lockStack = stack.copy();
-		lockStack.setCount(1);
-		ILockableHandler handler = LocksComponents.LOCKABLE_HANDLER.get(world);
-		Lockable lockable = new Lockable(new Cuboid6i(pos, pos1), Lock.from(stack), Transform.fromDirection(ctx.getClickedFace(), player.getDirection().getOpposite()), lockStack, world);
-		//Locks.LOGGER.info(lockable.bb.toString(), lockable.lock.id);
-		if (!handler.add(lockable,world))
-			return InteractionResult.PASS;
-		if (!player.isCreative())
-			stack.shrink(1);
-		return InteractionResult.SUCCESS;
-	}
+//	public InteractionResult freeLock(UseOnContext ctx) {
+//		Player player = ctx.getPlayer();
+//		BlockPos pos = ctx.getClickedPos();
+//		if(player ==null)
+//			return InteractionResult.PASS;
+//        ISelection select = LocksComponents.SELECTION.get(player);
+//		BlockPos pos1 = select.get();
+//		if (pos1 == null)
+//			select.set(pos);
+//		else
+//		{
+//			Level world = ctx.getLevel();
+//			select.set(null);
+//			// FIXME Go through the add checks here as well
+//			world.playSound(player, pos, LocksSoundEvents.LOCK_CLOSE, SoundSource.BLOCKS, 1f, 1f);
+//			if (world.isClientSide)
+//				return InteractionResult.SUCCESS;
+//			ItemStack stack = ctx.getItemInHand();
+//			ItemStack lockStack = stack.copy();
+//			lockStack.setCount(1);
+//			ILockableHandler handler = LocksComponents.LOCKABLE_HANDLER.get(world);
+//			if (!handler.add(new Lockable(new Cuboid6i(pos1, pos), Lock.from(stack), Transform.fromDirection(ctx.getClickedFace(), player.getDirection().getOpposite()), lockStack, world),world))
+//				return InteractionResult.PASS;
+//			if (!player.isCreative())
+//				stack.shrink(1);
+//		}
+//		return InteractionResult.SUCCESS;
+//	}
+//
+//	public InteractionResult easyLock(UseOnContext ctx) {
+//		Player player = ctx.getPlayer();
+//		Level world = ctx.getLevel();
+//		BlockPos pos = ctx.getClickedPos();
+//		world.playSound(player, pos, LocksSoundEvents.LOCK_CLOSE, SoundSource.BLOCKS, 1f, 1f);
+//		if(world.isClientSide) return InteractionResult.SUCCESS;
+//		BlockState state = world.getBlockState(pos);
+//		BlockPos pos1 = pos;
+//		if(state.hasProperty(BlockStateProperties.CHEST_TYPE) && state.getValue(BlockStateProperties.CHEST_TYPE) != ChestType.SINGLE) {
+//			pos1 = pos.relative(ChestBlock.getConnectedDirection(state));
+//		}
+//		else if(state.hasProperty(BlockStateProperties.DOUBLE_BLOCK_HALF)) {
+//			pos1 = state.getValue(BlockStateProperties.DOUBLE_BLOCK_HALF) == DoubleBlockHalf.LOWER ? pos.above() : pos.below();
+//			if(state.hasProperty(BlockStateProperties.DOOR_HINGE) && state.hasProperty(BlockStateProperties.HORIZONTAL_FACING))
+//			{
+//				Direction dir = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
+//				BlockPos pos2 = pos1.relative(state.getValue(BlockStateProperties.DOOR_HINGE) == DoorHingeSide.LEFT ? dir.getClockWise() : dir.getCounterClockWise());
+//				if(world.getBlockState(pos2).is(state.getBlock()))
+//					pos1 = pos2;
+//			}
+//		}
+//		ItemStack stack = ctx.getItemInHand();
+//		ItemStack lockStack = stack.copy();
+//		lockStack.setCount(1);
+//		ILockableHandler handler = LocksComponents.LOCKABLE_HANDLER.get(world);
+//		Lockable lockable = new Lockable(new Cuboid6i(pos, pos1), Lock.from(stack), Transform.fromDirection(ctx.getClickedFace(), player.getDirection().getOpposite()), lockStack, world);
+//		//Locks.LOGGER.info(lockable.bb.toString(), lockable.lock.id);
+//		if (!handler.add(lockable,world))
+//			return InteractionResult.PASS;
+//		if (!player.isCreative())
+//			stack.shrink(1);
+//		return InteractionResult.SUCCESS;
+//	}
 
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand)
-	{
+	public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
 		if(!isOpen(stack))
 			return super.use(world, player, hand);
@@ -174,8 +177,7 @@ public class LockItem extends LockingItem
 
 	@Environment(EnvType.CLIENT)
 	@Override
-	public void appendHoverText(ItemStack stack, Level world, List<Component> lines, TooltipFlag flag)
-	{
+	public void appendHoverText(ItemStack stack, Level world, List<Component> lines, TooltipFlag flag) {
 		super.appendHoverText(stack, world, lines, flag);
 		lines.add(Component.translatable(Locks.ID + ".tooltip.length", ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(stack.hasTag() && stack.getTag().contains(KEY_LENGTH) ? stack.getTag().getByte(KEY_LENGTH) : this.length)).withStyle(ChatFormatting.DARK_GREEN));
 	}

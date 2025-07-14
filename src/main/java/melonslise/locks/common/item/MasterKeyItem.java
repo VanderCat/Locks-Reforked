@@ -1,8 +1,6 @@
 package melonslise.locks.common.item;
 
 import melonslise.locks.common.init.LocksSoundEvents;
-import melonslise.locks.common.util.Lockable;
-import melonslise.locks.common.util.LocksUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
@@ -22,18 +20,17 @@ public class MasterKeyItem extends Item
 
 	// TODO Sound pitch
 	@Override
-	public InteractionResult useOn(UseOnContext ctx)
-	{
-		Level world = ctx.getLevel();
-		BlockPos pos = ctx.getClickedPos();
-		List<Lockable> match = LocksUtil.intersecting(world, pos).collect(Collectors.toList());
-		if(match.isEmpty())
-			return InteractionResult.PASS;
-		world.playSound(ctx.getPlayer(), pos, LocksSoundEvents.LOCK_OPEN, SoundSource.BLOCKS, 1f, 1f);
-		if(world.isClientSide)
-			return InteractionResult.SUCCESS;
-		for(Lockable lkb : match)
-			lkb.lock.setLocked(!lkb.lock.isLocked());
+	public InteractionResult useOn(UseOnContext ctx) {
+//		Level world = ctx.getLevel();
+//		BlockPos pos = ctx.getClickedPos();
+//		List<Lockable> match = LocksUtil.intersecting(world, pos).collect(Collectors.toList());
+//		if(match.isEmpty())
+//			return InteractionResult.PASS;
+//		world.playSound(ctx.getPlayer(), pos, LocksSoundEvents.LOCK_OPEN, SoundSource.BLOCKS, 1f, 1f);
+//		if(world.isClientSide)
+//			return InteractionResult.SUCCESS;
+//		for(Lockable lkb : match)
+//			lkb.lock.setLocked(!lkb.lock.isLocked());
 		return InteractionResult.SUCCESS;
 	}
 }

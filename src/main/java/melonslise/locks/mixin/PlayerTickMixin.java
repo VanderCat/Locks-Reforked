@@ -16,13 +16,13 @@ public class PlayerTickMixin {
 
     @Inject(method = "tick", at = @At("TAIL"))
     private void tick(CallbackInfo ci) {
-
-        ISelection select = LocksComponents.SELECTION.get((Player) (Object) this);
-        if (select == null)
-            return;
-        for (ItemStack stack : ((Player) (Object) this).getHandSlots())
-            if(stack.is(LocksItemTags.LOCKS))
-                return;
-        select.set(null);
+//
+//        ISelection select = LocksComponents.SELECTION.get((Player) (Object) this);
+//        if (select == null)
+//            return;
+//        for (ItemStack stack : ((Player) (Object) this).getHandSlots())
+//            if(stack.is(LocksItemTags.LOCKS))
+//                return;
+//        select.set(null);
     }
 }

@@ -34,7 +34,7 @@ public final class LocksItems implements ItemRegistryContainer {
             GOLD_LOCK = new LockItem(6, 22, 6, new Item.Properties()),
             DIAMOND_LOCK = new LockItem(11, 10, 100, new Item.Properties()),
             NETHERITE_LOCK = new LockItem(15, 12, 100, new Item.Properties().fireResistant()),
-            SMART_NETHERITE_LOCK = new SmartLockItem(12, new Item.Properties().fireResistant()),
+            //SMART_NETHERITE_LOCK = new SmartLockItem(12, new Item.Properties().fireResistant()),
             KEY = new KeyItem(new Item.Properties()),
             MASTER_KEY = new MasterKeyItem(new Item.Properties()),
             KEY_RING = new KeyRingItem(2, new Item.Properties()),
@@ -61,7 +61,7 @@ public final class LocksItems implements ItemRegistryContainer {
                     entries.accept(GOLD_LOCK);
                     entries.accept(DIAMOND_LOCK);
                     entries.accept(NETHERITE_LOCK);
-                    entries.accept(SMART_NETHERITE_LOCK);
+                    //entries.accept(SMART_NETHERITE_LOCK);
                     entries.accept(KEY);
                     entries.accept(MASTER_KEY);
                     entries.accept(KEY_RING);

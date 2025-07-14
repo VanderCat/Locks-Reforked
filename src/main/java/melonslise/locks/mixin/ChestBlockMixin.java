@@ -19,9 +19,9 @@ public class ChestBlockMixin
 	@Inject(at = @At("HEAD"), method = "candidatePartnerFacing", cancellable = true)
 	private void candidatePartnerFacing(BlockPlaceContext ctx, Direction dir, CallbackInfoReturnable<Direction> cir)
 	{
-		Level world = ctx.getLevel();
-		BlockPos pos = ctx.getClickedPos().relative(dir);
-		BlockState state = world.getBlockState(pos);
-		cir.setReturnValue(state.is((ChestBlock) (Object) this) && state.getValue(ChestBlock.TYPE) == ChestType.SINGLE && !LocksUtil.locked(world, pos)  ? state.getValue(ChestBlock.FACING) : null);
+//		Level world = ctx.getLevel();
+//		BlockPos pos = ctx.getClickedPos().relative(dir);
+//		BlockState state = world.getBlockState(pos);
+//		cir.setReturnValue(state.is((ChestBlock) (Object) this) && state.getValue(ChestBlock.TYPE) == ChestType.SINGLE && !LocksUtil.locked(world, pos)  ? state.getValue(ChestBlock.FACING) : null);
 	}
 }

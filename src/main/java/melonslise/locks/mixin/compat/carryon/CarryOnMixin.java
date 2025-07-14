@@ -18,8 +18,8 @@ import tschipp.carryon.common.carry.PickupHandler;
 public class CarryOnMixin {
     @Inject(method = "tryPickUpBlock", at=@At("HEAD"), cancellable = true)
     private static void tryPickUpBlock(ServerPlayer player, BlockPos pos, Level level, BiFunction<BlockState, BlockPos, Boolean> pickupCallback, CallbackInfoReturnable<Boolean> info) {
-        if (LocksUtil.locked(level, pos)){
-            info.setReturnValue(false);
-        }
+//        if (LocksUtil.locked(level, pos)){
+//            info.setReturnValue(false);
+//        }
     }
 }

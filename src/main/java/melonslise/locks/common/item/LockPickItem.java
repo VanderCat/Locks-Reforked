@@ -1,11 +1,10 @@
 package melonslise.locks.common.item;
 
 import melonslise.locks.Locks;
+import melonslise.locks.common.components.Locked;
 import melonslise.locks.common.container.LockPickingContainer;
+import melonslise.locks.common.init.LocksComponents;
 import melonslise.locks.common.init.LocksEnchantments;
-import melonslise.locks.common.util.Lockable;
-import melonslise.locks.common.util.LocksPredicates;
-import melonslise.locks.common.util.LocksUtil;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.ChatFormatting;
@@ -41,8 +40,7 @@ public class LockPickItem extends Item
 	public static final String KEY_STRENGTH = "Strength";
 
 	// WARNING: EXPECTS LOCKPICKITEM STACK
-	public static float getOrSetStrength(ItemStack stack)
-	{
+	public static float getOrSetStrength(ItemStack stack) {
 		CompoundTag nbt = stack.getOrCreateTag();
 		if(!nbt.contains(KEY_STRENGTH))
 			nbt.putFloat(KEY_STRENGTH, ((LockPickItem) stack.getItem()).strength);
@@ -61,9 +59,9 @@ public class LockPickItem extends Item
 		return (getOrSetStrength(stack) > cmp * 0.25f);
 	}
 
-	public static boolean canPick(ItemStack stack, Lockable lkb)
+	public static boolean canPick(ItemStack lockpick, ItemStack lock)
 	{
-		return canPick(stack, EnchantmentHelper.getItemEnchantmentLevel(LocksEnchantments.COMPLEXITY, lkb.stack));
+		return canPick(lockpick, EnchantmentHelper.getItemEnchantmentLevel(LocksEnchantments.COMPLEXITY, lock));
 	}
 
 	/**
@@ -73,30 +71,36 @@ public class LockPickItem extends Item
 	 * @return - Consequences from the action
 	 */
 	@Override
-	public InteractionResult useOn(UseOnContext ctx)
-	{
+	public InteractionResult useOn(UseOnContext ctx) {
 		//Defines player, world, position of interacted block, and a list of possible locks interacted with.
 		Level world = ctx.getLevel();
 		Player player = ctx.getPlayer();
 		BlockPos pos = ctx.getClickedPos();
-		List<Lockable> match = LocksUtil.intersecting(world, pos).filter(LocksPredicates.LOCKED).collect(Collectors.toList());
+		//List<Lockable> match = LocksUtil.intersecting(world, pos).filter(LocksPredicates.LOCKED).collect(Collectors.toList());
 
 		//If no locks are in the matching position or if it is a smart lock, it ignores. Otherwise it verifies if the lock has the complexity enchantment and carries out its effect.
-		if(match.isEmpty() || match.get(0).isSmart())
+//		if(match.isEmpty() || match.get(0).isSmart())
+//			return InteractionResult.PASS;
+		var ent = world.getBlockEntity(pos);
+		if (ent == null)
 			return InteractionResult.PASS;
-		Lockable lkb = match.get(0);
-		if(!canPick(ctx.getItemInHand(), lkb))
-		{
-			Locks.LOGGER.warn(!canPick(ctx.getItemInHand(), lkb));
-			if(world.isClientSide) player.displayClientMessage(TOO_COMPLEX_MESSAGE, true);
+		Locked lock = ent.getComponent(LocksComponents.LOCKED);
+		var lockStack = lock.getLock();
+		if (lockStack == ItemStack.EMPTY)
+			return InteractionResult.PASS;
+		if(!canPick(ctx.getItemInHand(), lockStack)) {
+			Locks.LOGGER.warn("Could not pick a lock");
+			if(world.isClientSide)
+				player.displayClientMessage(TOO_COMPLEX_MESSAGE, true);
 			return InteractionResult.PASS;
 		}
-		if(world.isClientSide) return InteractionResult.SUCCESS;
+		if(world.isClientSide)
+			return InteractionResult.SUCCESS;
 
 		//It opens the lock picking minigame.
 		InteractionHand hand = ctx.getHand();
-		if(player instanceof ServerPlayer && !match.get(0).isSmart()) {
-			player.openMenu(new LockPickingContainer.Provider(hand, lkb));
+		if(player instanceof ServerPlayer) {
+			player.openMenu(new LockPickingContainer.Provider(hand, lockStack, ctx.getClickedPos()));
 		}
 		return InteractionResult.SUCCESS;
 	}

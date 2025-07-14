@@ -1,12 +1,8 @@
 package melonslise.locks.common.util;
 
-import melonslise.locks.Locks;
-import melonslise.locks.common.config.LocksConfig;
 import melonslise.locks.common.init.LocksComponents;
-import melonslise.locks.common.network.toclient.AddLockablePacket;
 import melonslise.locks.mixin.accessor.LootPoolAccessor;
 import melonslise.locks.mixin.accessor.LootTableAccessor;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
@@ -18,9 +14,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ChestBlock;
 import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -31,14 +25,10 @@ import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
-import java.lang.reflect.Array;
-import java.lang.reflect.Constructor;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -143,68 +133,69 @@ public final class LocksUtil {
         return table;
     }
 
-    public static Stream<Lockable> intersecting(Level world, BlockPos pos) {
-        return LocksComponents.LOCKABLE_HANDLER.get(world).getInChunk(pos).values().stream().filter(
-                lkb -> lkb.bb.intersects(pos)
-        );
-    }
+//    public static Stream<Lockable> intersecting(Level world, BlockPos pos) {
+////        return LocksComponents.LOCKABLE_HANDLER.get(world).getInChunk(pos).values().stream().filter(
+////                lkb -> lkb.boundingBox.intersects(pos)
+////        );
+//        throw new RuntimeException();
+//    }
 
-    public static boolean lockedAndRelated(Level world, BlockPos pos) {
-        BlockPos above = pos.above();
-        Block aboveBlock = world.getBlockState(above).getBlock();
-        boolean checkAbove = LocksUtil.locked(world, above) && aboveBlock instanceof DoorBlock;
-        return locked(world, pos) || checkAbove;
-    }
+//    public static boolean lockedAndRelated(Level world, BlockPos pos) {
+//        BlockPos above = pos.above();
+//        Block aboveBlock = world.getBlockState(above).getBlock();
+//        boolean checkAbove = LocksUtil.locked(world, above) && aboveBlock instanceof DoorBlock;
+//        return locked(world, pos) || checkAbove;
+//    }
+//
+//    public static boolean locked(Level world, BlockPos pos) {
+//        return intersecting(world, pos).anyMatch(LocksPredicates.LOCKED);
+//    }
 
-    public static boolean locked(Level world, BlockPos pos) {
-        return intersecting(world, pos).anyMatch(LocksPredicates.LOCKED);
-    }
-
-    // TODO: 方块遮挡判断
-    public static Lockable lockWhenGen(LevelAccessor levelAccessor, ServerLevel level, BlockPos blockPos) {
-        var stack = getRandomLock(level);
-        if (stack == null) 
-            return null;
-        BlockState state = levelAccessor.getBlockState(blockPos);
-        BlockPos pos1 = blockPos;
-        Direction dir = null;
-        if (state.hasProperty(FACING)) {
-            dir = state.getValue(FACING);
-        } else if (state.hasProperty(HORIZONTAL_FACING)) {
-            dir = state.getValue(HORIZONTAL_FACING);
-        } else {
-            return null;
-        }
-
-        if (state.hasProperty(CHEST_TYPE)) {
-            switch (state.getValue(CHEST_TYPE)) {
-                case LEFT -> pos1 = blockPos.relative(ChestBlock.getConnectedDirection(state));
-                case RIGHT -> {
-                    return null;
-                }
-            }
-        }
-        if (state.hasProperty(DOUBLE_BLOCK_HALF)) {
-            if (state.getValue(DOUBLE_BLOCK_HALF) == LOWER) return null;
-            pos1 = blockPos.below();
-            if (state.hasProperty(DOOR_HINGE)) {
-                if (state.hasProperty(DOOR_HINGE) && state.hasProperty(HORIZONTAL_FACING)) {
-                    BlockPos pos2 = pos1.relative(state.getValue(DOOR_HINGE) == LEFT ? dir.getClockWise() : dir.getCounterClockWise());
-                    if (levelAccessor.getBlockState(pos2).is(state.getBlock())) {
-                        if (state.getValue(DOOR_HINGE) == LEFT) {
-                            return null;
-                        }
-                        pos1 = pos2;
-                    }
-                }
-                dir = dir.getOpposite();
-            }
-        }
-        Cuboid6i bb = new Cuboid6i(blockPos, pos1);
-        Lock lock = Lock.from(stack);
-        Transform tr = Transform.fromDirection(dir, dir);
-        return new Lockable(bb, lock, tr, stack, level);
-    }
+//    // TODO: 方块遮挡判断
+//    public static Lockable lockWhenGen(LevelAccessor levelAccessor, ServerLevel level, BlockPos blockPos) {
+//        var stack = getRandomLock(level);
+//        if (stack == null)
+//            return null;
+//        BlockState state = levelAccessor.getBlockState(blockPos);
+//        BlockPos pos1 = blockPos;
+//        Direction dir = null;
+//        if (state.hasProperty(FACING)) {
+//            dir = state.getValue(FACING);
+//        } else if (state.hasProperty(HORIZONTAL_FACING)) {
+//            dir = state.getValue(HORIZONTAL_FACING);
+//        } else {
+//            return null;
+//        }
+//
+//        if (state.hasProperty(CHEST_TYPE)) {
+//            switch (state.getValue(CHEST_TYPE)) {
+//                case LEFT -> pos1 = blockPos.relative(ChestBlock.getConnectedDirection(state));
+//                case RIGHT -> {
+//                    return null;
+//                }
+//            }
+//        }
+//        if (state.hasProperty(DOUBLE_BLOCK_HALF)) {
+//            if (state.getValue(DOUBLE_BLOCK_HALF) == LOWER) return null;
+//            pos1 = blockPos.below();
+//            if (state.hasProperty(DOOR_HINGE)) {
+//                if (state.hasProperty(DOOR_HINGE) && state.hasProperty(HORIZONTAL_FACING)) {
+//                    BlockPos pos2 = pos1.relative(state.getValue(DOOR_HINGE) == LEFT ? dir.getClockWise() : dir.getCounterClockWise());
+//                    if (levelAccessor.getBlockState(pos2).is(state.getBlock())) {
+//                        if (state.getValue(DOOR_HINGE) == LEFT) {
+//                            return null;
+//                        }
+//                        pos1 = pos2;
+//                    }
+//                }
+//                dir = dir.getOpposite();
+//            }
+//        }
+//        Cuboid6i bb = new Cuboid6i(blockPos, pos1);
+//        Lock lock = Lock.from(stack);
+//        Transform tr = Transform.fromDirection(dir, dir);
+//        return new Lockable(bb, lock, tr, stack, level);
+//    }
 
     public static ItemStack getRandomLock(ServerLevel level) {
         var lootTable = level.getServer().getLootData().getLootTable(new ResourceLocation("locks:locks"));
@@ -217,27 +208,27 @@ public final class LocksUtil {
         return loot.pop();
     }
 
-    public static Lockable lockCheck(LevelAccessor levelAccessor, ServerLevel level, BlockPos blockPos) {
-        if (levelAccessor.hasChunk(blockPos.getX() >> 4, blockPos.getZ() >> 4)){
-            return lockWhenGen(levelAccessor, level, blockPos);
-        }
-        return null;
-    }
+//    public static Lockable lockCheck(LevelAccessor levelAccessor, ServerLevel level, BlockPos blockPos) {
+//        if (levelAccessor.hasChunk(blockPos.getX() >> 4, blockPos.getZ() >> 4)){
+//            return lockWhenGen(levelAccessor, level, blockPos);
+//        }
+//        return null;
+//    }
 
-    public static boolean lockChunk(LevelAccessor levelAccessor, ServerLevel level, BlockPos blockPos, ChunkAccess chunkAccess){
-        Lockable lkb = LocksUtil.lockCheck(levelAccessor, level, blockPos);
-        if (lkb == null) return false;
-        ((ILockableProvider) chunkAccess).getLockables().add(lkb);
-        return true;
-    }
-
-    public static boolean lockChunk(LevelAccessor levelAccessor, ServerLevel level, BlockPos blockPos){
-        Lockable lkb = LocksUtil.lockCheck(levelAccessor, level, blockPos);
-        if (lkb == null) return false;
-        lkb.bb.getContainedChunks((x, z) -> {
-            ((ILockableProvider) levelAccessor.getChunk(x, z)).getLockables().add(lkb);
-            return true;
-        });
-        return true;
-    }
+//    public static boolean lockChunk(LevelAccessor levelAccessor, ServerLevel level, BlockPos blockPos, ChunkAccess chunkAccess){
+//        Lockable lkb = LocksUtil.lockCheck(levelAccessor, level, blockPos);
+//        if (lkb == null) return false;
+//        ((ILockableProvider) chunkAccess).getLockables().add(lkb);
+//        return true;
+//    }
+//
+//    public static boolean lockChunk(LevelAccessor levelAccessor, ServerLevel level, BlockPos blockPos){
+//        Lockable lkb = LocksUtil.lockCheck(levelAccessor, level, blockPos);
+//        if (lkb == null) return false;
+//        lkb.boundingBox.getContainedChunks((x, z) -> {
+//            ((ILockableProvider) levelAccessor.getChunk(x, z)).getLockables().add(lkb);
+//            return true;
+//        });
+//        return true;
+//    }
 }

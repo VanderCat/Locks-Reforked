@@ -21,7 +21,7 @@ public class WorldRendererMixin
 	@Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/LevelRenderer;checkPoseStack(Lcom/mojang/blaze3d/vertex/PoseStack;)V", ordinal = 0), method = "renderLevel")
 	private void renderLevel(PoseStack mtx, float pt, long nanoTime, boolean renderOutline, Camera cam, GameRenderer gr, LightTexture lightTex, Matrix4f proj, CallbackInfo ci)
 	{
-		LocksClient.renderLocks(mtx, Minecraft.getInstance().renderBuffers().bufferSource(), LocksClientUtil.getFrustum(mtx, proj), pt);
+//		LocksClient.renderLocks(mtx, Minecraft.getInstance().renderBuffers().bufferSource(), LocksClientUtil.getFrustum(mtx, proj), pt);
 	}
 
 }

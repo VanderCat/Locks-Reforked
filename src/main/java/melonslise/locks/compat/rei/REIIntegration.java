@@ -29,16 +29,16 @@ public class REIIntegration {
     public static void registerDisplays(DisplayRegistry registry) {
         ItemStack leftStack = new ItemStack(LocksItems.NETHERITE_LOCK);
         ItemStack rightStack = new ItemStack(LocksItems.INTEGRATED_CIRCUIT);
-        ItemStack outputStack = new ItemStack(LocksItems.SMART_NETHERITE_LOCK);
+        //ItemStack outputStack = new ItemStack(LocksItems.SMART_NETHERITE_LOCK);
 
 
         // Create recipe with proper parameters
-        AnvilRecipe recipe = new AnvilRecipe(
-                new ResourceLocation("locks", "netherite_smart_lock_recipe"),
-                Collections.singletonList(leftStack),
-                Collections.singletonList(rightStack),
-                Collections.singletonList(outputStack)
-        );
+//        AnvilRecipe recipe = new AnvilRecipe(
+//                new ResourceLocation("locks", "netherite_smart_lock_recipe"),
+//                Collections.singletonList(leftStack),
+//                Collections.singletonList(rightStack),
+//                //Collections.singletonList(outputStack)
+//        );
 
         AnvilRecipe recipe2 = new AnvilRecipe(
                 new ResourceLocation("locks", "copy_lock"),
@@ -58,7 +58,7 @@ public class REIIntegration {
             )
         );
 
-        registry.add(recipe);
+        //registry.add(recipe);
         registry.add(recipe2);
         registry.add(recipe3);
     }
