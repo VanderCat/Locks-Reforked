@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "n": {
+      "item": "minecraft:iron_nugget"
+    }
+  },
+  "pattern": [
+    "nn ",
+    "nn ",
+    "I  "
+  ],
+  "result": {
+    "count": 4,
+    "item": "locks:key_blank"
+  },
+  "show_notification": true
+}

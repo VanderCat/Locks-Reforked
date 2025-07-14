@@ -1,5 +1,6 @@
 package melonslise.locks.mixin;
 
+import melonslise.locks.common.init.LocksBlockTags;
 import melonslise.locks.common.init.LocksComponents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
@@ -20,7 +21,7 @@ public class ServerWorldMixin
 {
 	@Inject(at = @At("HEAD"), method = "sendBlockUpdated")
 	private void sendBlockUpdated(BlockPos pos, BlockState oldState, BlockState newState, int flag, CallbackInfo ci) {
-		var tag = TagKey.create(Registries.BLOCK, new ResourceLocation("locks:treasure"));
+		var tag = LocksBlockTags.TREASURE;
 		if (oldState.is(tag) && newState.is(tag)) {
 			return;
 		}

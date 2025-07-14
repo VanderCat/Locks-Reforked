@@ -3,6 +3,7 @@ package melonslise.locks.common.worldgen.feature;
 import com.mojang.serialization.Codec;
 
 import melonslise.locks.Locks;
+import melonslise.locks.common.init.LocksBlockTags;
 import melonslise.locks.common.init.LocksComponents;
 import melonslise.locks.common.init.LocksLootParamSets;
 import melonslise.locks.common.util.*;
@@ -139,7 +140,6 @@ public class LocksFeature extends Feature<NoneFeatureConfiguration> {
     public boolean place(@NotNull FeaturePlaceContext<NoneFeatureConfiguration> context) {
         var level = context.level();
         var origin = context.origin();
-        var tag = TagKey.create(Registries.BLOCK, new ResourceLocation("locks:treasure"));
         BlockPos testPos = new BlockPos(origin);
         //Log.info(LogCategory.LOG, ""+origin);
         Log.info(LogCategory.LOG, ""+origin);
@@ -153,7 +153,7 @@ public class LocksFeature extends Feature<NoneFeatureConfiguration> {
                     var pos = new BlockPos(x, y, z);
                     var state = level.getBlockState(pos);
 
-                    if (state.is(tag))
+                    if (state.is(LocksBlockTags.TREASURE))
                         success |= SpawnLock(context, state, origin);
                 }
             return success;
@@ -161,7 +161,7 @@ public class LocksFeature extends Feature<NoneFeatureConfiguration> {
         //for manual invoking /place feature locks:lock
         var state = level.getBlockState(testPos);
         //Log.info(LogCategory.LOG, ""+origin.getY()+" "+state);
-        if (state.is(tag)) 
+        if (state.is(LocksBlockTags.TREASURE))
             return SpawnLock(context, state, origin);
         return false;
     }

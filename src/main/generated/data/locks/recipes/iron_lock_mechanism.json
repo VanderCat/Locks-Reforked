@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "lock_mechanisms",
+  "key": {
+    ".": {
+      "item": "minecraft:iron_nugget"
+    },
+    "S": {
+      "item": "locks:spring"
+    },
+    "_": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "pattern": [
+    "SSS",
+    "...",
+    "___"
+  ],
+  "result": {
+    "item": "locks:iron_lock_mechanism"
+  },
+  "show_notification": true
+}

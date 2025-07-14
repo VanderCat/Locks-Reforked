@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "locks",
+  "key": {
+    "#": {
+      "tag": "minecraft:planks"
+    },
+    "@": {
+      "item": "locks:wood_lock_mechanism"
+    }
+  },
+  "pattern": [
+    " # ",
+    "#@#",
+    "###"
+  ],
+  "result": {
+    "item": "locks:wood_lock"
+  },
+  "show_notification": true
+}

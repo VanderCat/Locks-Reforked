@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "lockpicks",
+  "key": {
+    "#": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    " # ",
+    "# #",
+    "## "
+  ],
+  "result": {
+    "item": "locks:wood_lock_pick"
+  },
+  "show_notification": true
+}

@@ -1,5 +1,6 @@
 package melonslise.locks.common.util;
 
+import melonslise.locks.common.init.LocksBlockTags;
 import melonslise.locks.common.init.LocksComponents;
 import melonslise.locks.mixin.accessor.LootPoolAccessor;
 import melonslise.locks.mixin.accessor.LootTableAccessor;
@@ -43,8 +44,7 @@ public final class LocksUtil {
 
     public static boolean canLock(Level world, BlockPos pos) {
         var block = world.getBlockState(pos);
-        var lockable = TagKey.create(Registries.BLOCK, new ResourceLocation("locks:lockable"));
-        return block.is(lockable);
+        return block.is(LocksBlockTags.LOCKABLE);
     }
 
     public static void shuffle(byte[] array, Random rng) {
