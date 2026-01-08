@@ -26,29 +26,7 @@ public abstract class AnvilMenuMixin {
         ItemStack right = menu.getSlot(1).getItem();
 
         if (!left.isEmpty() && !right.isEmpty()) {
-            if (left.is(LocksItems.NETHERITE_LOCK) && right.is(LocksItems.INTEGRATED_CIRCUIT)) {
-
-                //ItemStack result = new ItemStack(LocksItems.SMART_NETHERITE_LOCK);
-
-                // Copy NBT data
-                if (left.hasTag()) {
-                    //result.setTag(left.getTag().copy());
-                }
-
-                // Copy custom name
-                if (left.hasCustomHoverName()) {
-                    //result.setHoverName(left.getHoverName());
-                }
-
-                // Set output and costs
-                //menu.getSlot(2).set(result);
-                this.cost.set(5);  // Use set() method for DataSlot
-                this.repairItemCountCost = 1;  // Material cost
-
-                ci.cancel();
-            }
-            else if (left.is(LocksItemTags.LOCKS) && right.is(LocksItemTags.LOCKS))
-            {
+            if (left.is(LocksItemTags.LOCKS) && right.is(LocksItemTags.LOCKS)) {
                 ItemStack result = right.copy();
 
                 if (left.hasTag()) {

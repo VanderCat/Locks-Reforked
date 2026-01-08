@@ -1,11 +1,13 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_log": {
+    "has_copper_ingot": {
       "conditions": {
         "items": [
           {
-            "tag": "minecraft:logs"
+            "items": [
+              "minecraft:copper_ingot"
+            ]
           }
         ]
       },
@@ -13,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "locks:wood_lock_pick"
+        "recipe": "locks:copper_lock"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_log",
+      "has_copper_ingot",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "locks:wood_lock_pick"
+      "locks:copper_lock"
     ]
   },
   "sends_telemetry_event": false

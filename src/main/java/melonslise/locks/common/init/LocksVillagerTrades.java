@@ -14,8 +14,8 @@ public class LocksVillagerTrades {
         Int2ObjectMap<VillagerTrades.ItemListing[]> levels = VillagerTrades.TRADES.get(VillagerProfession.TOOLSMITH);
         List<VillagerTrades.ItemListing> trades;
         trades = new ArrayList<>(List.of(levels.get(1)));
-        trades.add(new VillagerTrades.ItemsForEmeralds(new ItemStack(LocksItems.WOOD_LOCK_PICK), 1, 2, 16, 2, 0.05f));
-        trades.add(new VillagerTrades.ItemsForEmeralds(new ItemStack(LocksItems.WOOD_LOCK_MECHANISM), 2, 1, 12, 1, 0.2f));
+        trades.add(new VillagerTrades.ItemsForEmeralds(new ItemStack(LocksItems.COPPER_LOCK_PICK), 1, 2, 16, 2, 0.05f));
+        trades.add(new VillagerTrades.ItemsForEmeralds(new ItemStack(LocksItems.COPPER_LOCK_MECHANISM), 2, 1, 12, 1, 0.2f));
         levels.replace(1, trades.toArray(new VillagerTrades.ItemListing[0]));
         trades = new ArrayList<>(List.of(levels.get(2)));
         trades.add(new VillagerTrades.ItemsForEmeralds(new ItemStack(LocksItems.IRON_LOCK_PICK), 2, 2, 16, 5, 0.05f));

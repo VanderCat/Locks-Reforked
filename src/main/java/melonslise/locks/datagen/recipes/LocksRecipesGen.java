@@ -42,10 +42,10 @@ public class LocksRecipesGen extends FabricRecipeProvider {
 
     @Override
     public void buildRecipes(Consumer<FinishedRecipe> exporter) {
-        lock(LocksItems.WOOD_LOCK)
-            .define('#', ItemTags.PLANKS)
-            .define('@', LocksItems.WOOD_LOCK_MECHANISM)
-                .unlockedBy("has_string", has(Items.STRING))
+        lock(LocksItems.COPPER_LOCK)
+            .define('#', Items.COPPER_INGOT)
+            .define('@', LocksItems.COPPER_LOCK_MECHANISM)
+                .unlockedBy(getHasName(Items.COPPER_INGOT), has(Items.COPPER_INGOT))
             .save(exporter);
 
         lock(LocksItems.IRON_LOCK)
@@ -66,13 +66,14 @@ public class LocksRecipesGen extends FabricRecipeProvider {
                 .unlockedBy(getHasName(Items.DIAMOND), has(Items.DIAMOND))
             .save(exporter);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, LocksItems.WOOD_LOCK_PICK, 1)
+        //TODO: add use copper nuggets if available
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, LocksItems.COPPER_LOCK_PICK, 9)
             .pattern(" # ")
             .pattern("# #")
             .pattern("## ")
             .group("lockpicks")
-            .define('#', Items.STICK)
-                .unlockedBy("has_log", has(ItemTags.LOGS))
+            .define('#', Items.COPPER_INGOT)
+                .unlockedBy(getHasName(Items.COPPER_INGOT), has(Items.COPPER_INGOT))
             .save(exporter);
 
         lockpick(LocksItems.IRON_LOCK_PICK)
@@ -90,14 +91,14 @@ public class LocksRecipesGen extends FabricRecipeProvider {
                 .unlockedBy(getHasName(Items.DIAMOND), has(Items.DIAMOND))
                 .save(exporter);
 
-        mechanism(LocksItems.WOOD_LOCK_MECHANISM)
-            .pattern("III")
+        mechanism(LocksItems.COPPER_LOCK_MECHANISM)
             .pattern("SSS")
-            .pattern("###")
-            .define('I', Items.STICK)
+            .pattern("|||")
+            .pattern("___")
+            .define('|', Items.STICK)
             .define('S', Items.STRING)
-            .define('#', ItemTags.PLANKS)
-                .unlockedBy("has_string", has(Items.STRING))
+            .define('_', Items.COPPER_INGOT)
+                .unlockedBy(getHasName(Items.STRING), has(Items.STRING))
             .save(exporter);
 
         mechanism(LocksItems.IRON_LOCK_MECHANISM)
@@ -110,13 +111,14 @@ public class LocksRecipesGen extends FabricRecipeProvider {
                 .unlockedBy(getHasName(Items.IRON_INGOT), has(Items.IRON_INGOT))
             .save(exporter);
 
+        //TODO: add use copper nuggets if available
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, LocksItems.KEY_BLANK, 4)
             .pattern("nn ")
             .pattern("nn ")
             .pattern("I  ")
-                .unlockedBy(getHasName(Items.IRON_INGOT), has(Items.IRON_INGOT))
+                .unlockedBy(getHasName(Items.COPPER_INGOT), has(Items.COPPER_INGOT))
             .define('n', Items.IRON_NUGGET)
-            .define('I', Items.IRON_INGOT)
+            .define('I', Items.COPPER_INGOT)
 
             .save(exporter);
 
@@ -128,12 +130,13 @@ public class LocksRecipesGen extends FabricRecipeProvider {
                 .unlockedBy(getHasName(Items.IRON_INGOT), has(Items.IRON_INGOT))
             .save(exporter);
 
+        //TODO: use copper nuggets if available
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, LocksItems.KEY_RING, 4)
                 .pattern(" n ")
                 .pattern("n n")
                 .pattern(" n ")
-                .unlockedBy(getHasName(Items.IRON_INGOT), has(Items.IRON_INGOT))
-                .define('n', Items.IRON_NUGGET)
+                .unlockedBy(getHasName(Items.COPPER_INGOT), has(Items.COPPER_INGOT))
+                .define('n', Items.COPPER_INGOT)
                 .save(exporter);
 
         SmithingTransformRecipeBuilder.smithing(

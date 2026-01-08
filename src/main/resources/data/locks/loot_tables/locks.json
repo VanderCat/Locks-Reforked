@@ -28,7 +28,7 @@
 			"entries": [
 				{
 					"type": "minecraft:item",
-					"name": "locks:wood_lock",
+					"name": "locks:copper_lock",
 					"weight": 5
 				},
                 {

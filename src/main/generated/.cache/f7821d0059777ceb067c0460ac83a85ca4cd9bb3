@@ -1,4 +1,4 @@
-// 1.20.1	2025-07-14T07:29:59.23711169	Locks/Tags for minecraft:item
+// 1.20.1	2026-01-08T23:08:45.788199683	Locks/Tags for minecraft:item
+36d5ab149cc626f1eecb87fc68c2d41b1900f3a2 data/locks/tags/items/lock_picks.json
 eb35954187f0fcf830f7889589e4e9e2e68875e1 data/locks/tags/items/keys.json
-5620b43e6ff6bfa704513a52dd9d019a24876264 data/locks/tags/items/lock_picks.json
-556e11a889fa7817dc79f72e508601f9fc50d4bb data/locks/tags/items/locks.json
+02160ef2dfaa0954407ef4fe880cd0a336d1b746 data/locks/tags/items/locks.json

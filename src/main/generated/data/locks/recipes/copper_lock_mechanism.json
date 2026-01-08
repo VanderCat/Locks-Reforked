@@ -3,23 +3,23 @@
   "category": "misc",
   "group": "lock_mechanisms",
   "key": {
-    "#": {
-      "tag": "minecraft:planks"
-    },
-    "I": {
-      "item": "minecraft:stick"
-    },
     "S": {
       "item": "minecraft:string"
+    },
+    "_": {
+      "item": "minecraft:copper_ingot"
+    },
+    "|": {
+      "item": "minecraft:stick"
     }
   },
   "pattern": [
-    "III",
     "SSS",
-    "###"
+    "|||",
+    "___"
   ],
   "result": {
-    "item": "locks:wood_lock_mechanism"
+    "item": "locks:copper_lock_mechanism"
   },
   "show_notification": true
 }

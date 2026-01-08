@@ -48,7 +48,7 @@
 				},
 				{
 					"type": "minecraft:item",
-					"name": "locks:wood_lock_pick",
+					"name": "locks:copper_lock_pick",
 					"weight": 5,
 					"functions":
 					[
@@ -70,7 +70,7 @@
 				},
 				{
 					"type": "minecraft:item",
-					"name": "locks:wood_lock_mechanism",
+					"name": "locks:copper_lock_mechanism",
 					"weight": 2
 				}
 			]

@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "locks:wood_lock_mechanism"
+        "recipe": "locks:copper_lock_mechanism"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "locks:wood_lock_mechanism"
+      "locks:copper_lock_mechanism"
     ]
   },
   "sends_telemetry_event": false
