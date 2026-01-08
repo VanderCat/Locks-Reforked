@@ -6,7 +6,8 @@
   "mixins": [
   ],
   "client": [
-    "BlockEntityRenderDispatcherMixin"
+    "BlockEntityRenderDispatcherMixin",
+    "OnLockedRemoveMixin"
   ],
   "injectors": {
     "defaultRequire": 1
