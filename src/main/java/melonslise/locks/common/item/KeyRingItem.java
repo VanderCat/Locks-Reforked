@@ -99,8 +99,8 @@ public class KeyRingItem extends Item
 //			/*if(world.isClientSide)
 //				return InteractionResult.SUCCESS;*/
 //			for(Lockable lkb : match) {
-//				lkb.lock.setLocked(!lkb.lock.isLocked());
-//				//Locks.LOGGER.warn(lkb.lock.isLocked());
+//				lkb.lock.setLocked(!lkb.lock.isOpen());
+//				//Locks.LOGGER.warn(lkb.lock.isOpen());
 //			}
 //			return InteractionResult.SUCCESS;
 //		}

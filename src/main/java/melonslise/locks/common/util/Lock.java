@@ -48,7 +48,7 @@ import java.util.Random;
 //	public static void toBuf(FriendlyByteBuf buf, Lock lock) {
 //		buf.writeInt(lock.id);
 //		buf.writeByte((int) lock.getLength());
-//		buf.writeBoolean(lock.isLocked());
+//		buf.writeBoolean(lock.isOpen());
 //	}
 //
 //

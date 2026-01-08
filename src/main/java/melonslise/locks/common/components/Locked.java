@@ -2,16 +2,15 @@ package melonslise.locks.common.components;
 
 import dev.onyxstudios.cca.api.v3.component.Component;
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
+import dev.onyxstudios.cca.api.v3.component.tick.ClientTickingComponent;
 import melonslise.locks.common.init.LocksComponents;
-import melonslise.locks.common.item.LockingItem;
+import melonslise.locks.common.item.LockItem;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
-import java.util.Optional;
-
-public class Locked implements Component, AutoSyncedComponent {
+public class Locked implements Component, AutoSyncedComponent, ClientTickingComponent {
 
     protected ItemStack lock = ItemStack.EMPTY;
     protected Direction direction = Direction.NORTH;
@@ -41,6 +40,10 @@ public class Locked implements Component, AutoSyncedComponent {
         LocksComponents.LOCKED.sync(provider);
     }
 
+    public Boolean isOpen() {
+        return LockItem.isOpen(lock);
+    }
+
     private final BlockEntity provider;
 
     public Locked(BlockEntity blockEntity) {
@@ -50,6 +53,21 @@ public class Locked implements Component, AutoSyncedComponent {
 
     public ItemStack getLock() {
         return lock;
+    }
+
+    public int maxSwingTicks, oldSwingTicks, swingTicks;
+
+    public void swing(int ticks) {
+        maxSwingTicks = ticks;
+        oldSwingTicks = maxSwingTicks;
+        swingTicks = oldSwingTicks;
+    }
+
+    @Override
+    public void clientTick() {
+        this.oldSwingTicks = this.swingTicks;
+        if(this.swingTicks > 0)
+            --this.swingTicks;
     }
 
     @Override

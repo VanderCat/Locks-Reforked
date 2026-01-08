@@ -10,7 +10,7 @@ public class LocksRenderEvents {
             var lock = locked.getLock();
             var dir = locked.getDirection();
             if (!lock.isEmpty())
-                LocksRendering.renderLock(lock, dir, light, poseStack, multiBufferSource);
+                LocksRendering.renderLock(locked, dir, light, poseStack, multiBufferSource);
         });
 //        HudRenderCallback.EVENT.register((guiGraphics, v) -> {
 //            var mc = Minecraft.getInstance();

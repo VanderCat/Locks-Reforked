@@ -30,7 +30,7 @@ public class MasterKeyItem extends Item
 //		if(world.isClientSide)
 //			return InteractionResult.SUCCESS;
 //		for(Lockable lkb : match)
-//			lkb.lock.setLocked(!lkb.lock.isLocked());
+//			lkb.lock.setLocked(!lkb.lock.isOpen());
 		return InteractionResult.SUCCESS;
 	}
 }

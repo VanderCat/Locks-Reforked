@@ -138,7 +138,7 @@
 ////        Lockable lockable = (Lockable) o;
 //////        UpdateLockablePacket.execute(new UpdateLockablePacket(lockable), this.world);
 ////        world.getServer().getPlayerList().players.forEach(player -> {}
-////            //LocksNetwork.CHANNEL.serverHandle(player).send(new UpdateLockable(lockable.id, lockable.lock.isLocked())
+////            //LocksNetwork.CHANNEL.serverHandle(player).send(new UpdateLockable(lockable.id, lockable.lock.isOpen())
 ////        );
 //        throw new NotImplementedException();
 //    }

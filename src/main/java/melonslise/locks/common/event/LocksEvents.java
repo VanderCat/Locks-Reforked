@@ -1,25 +1,20 @@
 package melonslise.locks.common.event;
 
-import io.wispforest.owo.ui.hud.Hud;
 import melonslise.locks.Locks;
 import melonslise.locks.common.components.Locked;
-import melonslise.locks.common.container.LockPickingContainer;
 import melonslise.locks.common.init.LocksComponents;
 import melonslise.locks.common.init.LocksItemTags;
 import melonslise.locks.common.init.LocksItems;
 import melonslise.locks.common.init.LocksSoundEvents;
 import melonslise.locks.common.item.*;
-import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
+import net.fabricmc.fabric.api.event.player.AttackBlockCallback;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
-import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.fabric.api.loot.v2.LootTableSource;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.sounds.SoundEvents;
@@ -28,7 +23,6 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -37,9 +31,6 @@ import net.minecraft.world.level.storage.loot.LootDataManager;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Arrays;
-import java.util.Optional;
 
 
 public final class LocksEvents
@@ -106,7 +97,7 @@ public final class LocksEvents
 		if (canLockpick(itemLock, itemInHand, player)) {
 			return InteractionResult.PASS;
 		}
-		//lkb.swing(20);
+		lock.swing(20);
 		world.playSound(player, result.getBlockPos(), LocksSoundEvents.LOCK_RATTLE, SoundSource.BLOCKS, 1f, 1f);
 		if(Locks.CONFIG.deafMode())
 			player.displayClientMessage(LOCKED_MESSAGE, true);
@@ -144,32 +135,42 @@ public final class LocksEvents
 	}
 
 
-//	public static boolean canBreakLockable(Level world,Player player, BlockPos pos)
-//	{
-//		return (Locks.CONFIG.protectLockables() &&
-//				!player.isCreative() &&
-//				LocksUtil.lockedAndRelated(world, pos));
-//	}
-
-	public static boolean onBlockBreaking(Level world, Player player, BlockPos pos, BlockState state,@Nullable BlockEntity entity)
-	{
-        //return !canBreakLockable(world,player, pos);
-		throw new RuntimeException();
+	public static boolean canBreakLockable(Player player, @Nullable BlockEntity entity) {
+        if (entity == null)
+            return true;
+        if (!Locks.CONFIG.protectLockables())
+            return true;
+		var locked = entity.getComponent(LocksComponents.LOCKED);
+        if (player.isCreative())
+            return true;
+        if (!locked.isOpen())
+            return false;
+        return true;
 	}
 
-	public static void onBlockBreak(Level world, Player player, BlockPos pos, BlockState state,@Nullable BlockEntity entity)
-	{
+	public static boolean onBlockBreaking(Level world, Player player, BlockPos pos, BlockState state,@Nullable BlockEntity entity) {
+        return canBreakLockable(player, entity);
+	}
+
+//	public static void onBlockBreak(Level world, Player player, BlockPos pos, BlockState state,@Nullable BlockEntity entity) {
 //		if(!canBreakLockable(world,player, pos)) {
 //			world.setBlockAndUpdate(pos, state);
 //		}
-	}
+//	}
 
-	public static void register()
-	{
+    private static InteractionResult onAttackBlock(Player player, Level world, InteractionHand hand, BlockPos pos, Direction direction) {
+        if (player.isSpectator())
+            return InteractionResult.PASS;
+        if (!canBreakLockable(player, world.getBlockEntity(pos)))
+            return InteractionResult.FAIL;
+        return InteractionResult.PASS;
+    }
+
+	public static void register() {
 //		LootTableEvents.MODIFY.register(LocksEvents::onLootTableLoad);
-//		PlayerBlockBreakEvents.BEFORE.register(LocksEvents::onBlockBreaking);
+		PlayerBlockBreakEvents.BEFORE.register(LocksEvents::onBlockBreaking);
+        AttackBlockCallback.EVENT.register(LocksEvents::onAttackBlock);
 //		PlayerBlockBreakEvents.AFTER.register(LocksEvents::onBlockBreak);
 		UseBlockCallback.EVENT.register(LocksEvents::onRightClick);
 	}
-
 }
