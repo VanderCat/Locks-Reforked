@@ -1,7 +1,7 @@
 package melonslise.locks.datagen.tags;
 
-import melonslise.locks.common.init.LocksItemTags;
-import melonslise.locks.common.init.LocksItems;
+import melonslise.locks.init.LocksItemTags;
+import melonslise.locks.init.LocksItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.core.HolderLookup;

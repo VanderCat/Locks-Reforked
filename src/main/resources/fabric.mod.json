@@ -32,7 +32,7 @@
 		"client": [
 			"melonslise.locks.Locks"
 		],
-		"cardinal-components": ["melonslise.locks.common.init.LocksComponents"],
+		"cardinal-components": ["melonslise.locks.init.LocksComponents"],
 		"jei_mod_plugin": ["melonslise.locks.compat.jei.LocksJeiPlugin"],
 		"rei_client": ["melonslise.locks.compat.rei.LocksReiPlugin"]
 	},

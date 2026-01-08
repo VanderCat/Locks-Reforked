@@ -2,8 +2,8 @@ package melonslise.locks.compat.rei;
 
 import me.shedaniel.rei.api.common.util.EntryIngredients;
 import me.shedaniel.rei.api.common.util.EntryStacks;
-import melonslise.locks.common.init.LocksItemTags;
-import melonslise.locks.common.init.LocksItems;
+import melonslise.locks.init.LocksItemTags;
+import melonslise.locks.init.LocksItems;
 import net.fabricmc.loader.api.FabricLoader;
 
 import me.shedaniel.rei.api.client.registry.display.DisplayRegistry;
@@ -15,7 +15,6 @@ import me.shedaniel.rei.plugin.common.displays.crafting.DefaultCustomShapelessDi
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.Arrays;
-import java.util.Collections;
 
 import net.minecraft.world.item.crafting.Ingredient;
 

@@ -1,35 +1,7 @@
 package melonslise.locks.client.util;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.*;
-import melonslise.locks.Locks;
-import melonslise.locks.client.init.LocksRenderTypes;
-import melonslise.locks.common.components.interfaces.ISelection;
-import melonslise.locks.common.init.LocksComponents;
-import melonslise.locks.common.init.LocksItemTags;
-//import melonslise.locks.common.util.Lockable;
-import melonslise.locks.common.util.LocksUtil;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
-import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.client.renderer.LevelRenderer;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.culling.Frustum;
-import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.util.FormattedCharSequence;
-import net.minecraft.util.Mth;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemDisplayContext;
-import net.minecraft.world.level.block.state.properties.AttachFace;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.Vec3;
-import org.joml.Matrix4f;
-import org.joml.Quaternionf;
+//import melonslise.locks.util.Lockable;
 
-import java.util.List;
 
 public class LocksClient {
 //    private static final Quaternionf ROTATE_X_90 = new Quaternionf().rotateX(Mth.DEG_TO_RAD * 90f);

@@ -1,13 +1,14 @@
 package melonslise.locks.events;
 
-import melonslise.locks.Locks;
-import melonslise.locks.common.components.Locked;
-import melonslise.locks.common.init.LocksComponents;
-import melonslise.locks.common.init.LocksItemTags;
-import melonslise.locks.common.init.LocksItems;
+import melonslise.locks.components.Locked;
+import melonslise.locks.init.LocksComponents;
+import melonslise.locks.init.LocksItemTags;
 import melonslise.locks.graphics.LocksRendering;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.Minecraft;
+import net.minecraft.world.level.block.ChestBlock;
+import net.minecraft.world.level.block.entity.ChestBlockEntity;
+import net.minecraft.world.level.block.state.properties.ChestType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 
@@ -17,8 +18,13 @@ public class LocksRenderEvents {
             var locked = blockEntity.getComponent(LocksComponents.LOCKED);
             var lock = locked.getLock();
             var dir = locked.getDirection();
-            if (!lock.isEmpty())
-                LocksRendering.renderLock(locked, dir, light, poseStack, multiBufferSource);
+            if (!lock.isEmpty()) {
+                if (blockEntity instanceof ChestBlockEntity cbe) {
+                    LocksRendering.renderLockOnChest(cbe, locked, light, poseStack, multiBufferSource);
+                    return;
+                }
+                LocksRendering.renderLockGeneric(locked, light, dir, poseStack, multiBufferSource);
+            }
         });
         HudRenderCallback.EVENT.register((guiGraphics, v) -> {
             var mc = Minecraft.getInstance();

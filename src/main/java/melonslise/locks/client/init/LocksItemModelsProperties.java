@@ -1,15 +1,15 @@
 package melonslise.locks.client.init;
 
 import melonslise.locks.Locks;
-import melonslise.locks.common.init.LocksItems;
-import melonslise.locks.common.item.LockItem;
+import melonslise.locks.init.LocksItems;
+import melonslise.locks.item.LockItem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 
-import melonslise.locks.common.item.KeyRingItem;
+import melonslise.locks.item.KeyRingItem;
 
 @Environment(EnvType.CLIENT)
 public final class LocksItemModelsProperties {

@@ -1,6 +1,6 @@
 package melonslise.locks.compat.jei;
 
-import melonslise.locks.common.init.LocksItems;
+import melonslise.locks.init.LocksItems;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.RecipeTypes;
@@ -11,7 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import mezz.jei.api.recipe.vanilla.IJeiAnvilRecipe;
 import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.ShapelessRecipe;
-import melonslise.locks.common.init.LocksItemTags;
+import melonslise.locks.init.LocksItemTags;
 import java.util.List;
 import java.util.Arrays;
 import net.minecraft.world.item.crafting.Ingredient;

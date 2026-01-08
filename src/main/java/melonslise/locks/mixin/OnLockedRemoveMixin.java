@@ -1,6 +1,6 @@
 package melonslise.locks.mixin;
 
-import melonslise.locks.common.init.LocksComponents;
+import melonslise.locks.init.LocksComponents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.Containers;
 import net.minecraft.world.level.Level;

@@ -1,7 +1,6 @@
 package melonslise.locks.mixin;
 
-import melonslise.locks.common.init.LocksItemTags;
-import melonslise.locks.common.init.LocksItems;
+import melonslise.locks.init.LocksItemTags;
 import net.minecraft.world.inventory.AnvilMenu;
 import net.minecraft.world.inventory.DataSlot;
 import net.minecraft.world.item.ItemStack;

@@ -1,6 +1,6 @@
 package melonslise.locks.client.gui;
 
-import melonslise.locks.common.container.KeyRingContainer;
+import melonslise.locks.container.KeyRingContainer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.GuiGraphics;
