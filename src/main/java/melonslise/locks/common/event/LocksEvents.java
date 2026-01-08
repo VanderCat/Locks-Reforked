@@ -97,6 +97,7 @@ public final class LocksEvents
 		if (canLockpick(itemLock, itemInHand, player)) {
 			return InteractionResult.PASS;
 		}
+        player.swing(hand);
 		lock.swing(20);
 		world.playSound(player, result.getBlockPos(), LocksSoundEvents.LOCK_RATTLE, SoundSource.BLOCKS, 1f, 1f);
 		if(Locks.CONFIG.deafMode())

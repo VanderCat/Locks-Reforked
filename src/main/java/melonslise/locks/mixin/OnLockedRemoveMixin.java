@@ -17,6 +17,8 @@ public class OnLockedRemoveMixin {
     private void dropLock(BlockState blockState, Level level, BlockPos blockPos, BlockState blockState2, boolean bl, CallbackInfo ci) {
         if (blockState.hasBlockEntity() && !blockState.is(blockState2.getBlock())) {
             var be = level.getBlockEntity(blockPos);
+            if (be == null)
+                return;
             var locked = be.getComponent(LocksComponents.LOCKED);
             var item = locked.getLock();
             if (item.isEmpty())

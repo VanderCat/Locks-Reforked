@@ -38,6 +38,7 @@ public class Locked implements Component, AutoSyncedComponent, ClientTickingComp
 
     public void sync() {
         LocksComponents.LOCKED.sync(provider);
+        provider.setChanged();
     }
 
     public Boolean isOpen() {
