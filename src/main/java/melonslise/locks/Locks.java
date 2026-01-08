@@ -7,6 +7,8 @@ import melonslise.locks.common.config.LocksConfig;
 import melonslise.locks.common.event.LocksEvents;
 import melonslise.locks.common.init.*;
 import melonslise.locks.common.network.LocksNetwork;
+import melonslise.locks.events.LocksRenderEvents;
+import melonslise.locks.graphics.LocksRendering;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
 import org.apache.logging.log4j.LogManager;
@@ -43,5 +45,6 @@ public final class Locks implements ModInitializer, ClientModInitializer {
 		LocksScreens.register();
 		LocksItemModelsProperties.register();
 		LocksNetwork.registerClientbound();
+		LocksRenderEvents.register();
 	}
 }

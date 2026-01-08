@@ -4,6 +4,7 @@ import dev.onyxstudios.cca.api.v3.component.Component;
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import melonslise.locks.common.init.LocksComponents;
 import melonslise.locks.common.item.LockingItem;
+import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -13,6 +14,7 @@ import java.util.Optional;
 public class Locked implements Component, AutoSyncedComponent {
 
     protected ItemStack lock = ItemStack.EMPTY;
+    protected Direction direction = Direction.NORTH;
 
     /**
      * Set lock on block
@@ -21,6 +23,14 @@ public class Locked implements Component, AutoSyncedComponent {
      */
     public void setLock(ItemStack lock) {
         this.lock = lock;
+    }
+
+    public void setDirection(Direction direction) {
+        this.direction = direction;
+    }
+
+    public Direction getDirection() {
+        return this.direction;
     }
 
     public void removeLock() {
@@ -35,6 +45,7 @@ public class Locked implements Component, AutoSyncedComponent {
 
     public Locked(BlockEntity blockEntity) {
         this.provider = blockEntity;
+        direction = Direction.NORTH; //ensure
     }
 
     public ItemStack getLock() {
@@ -45,10 +56,15 @@ public class Locked implements Component, AutoSyncedComponent {
     public void readFromNbt(CompoundTag compoundTag) {
         var tag = compoundTag.getCompound("lock");
         this.lock = ItemStack.of(tag);
+        var dir = Direction.byName(compoundTag.getString("direction"));
+        if (dir == null)
+            dir = Direction.NORTH;
+        this.direction = dir;
     }
 
     @Override
     public void writeToNbt(CompoundTag compoundTag) {
         compoundTag.put("lock", lock.save(new CompoundTag()));
+        compoundTag.putString("direction", this.direction.getSerializedName());
     }
 }

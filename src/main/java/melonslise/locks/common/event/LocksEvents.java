@@ -1,5 +1,6 @@
 package melonslise.locks.common.event;
 
+import io.wispforest.owo.ui.hud.Hud;
 import melonslise.locks.Locks;
 import melonslise.locks.common.components.Locked;
 import melonslise.locks.common.container.LockPickingContainer;
@@ -8,10 +9,13 @@ import melonslise.locks.common.init.LocksItemTags;
 import melonslise.locks.common.init.LocksItems;
 import melonslise.locks.common.init.LocksSoundEvents;
 import melonslise.locks.common.item.*;
+import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.fabric.api.loot.v2.LootTableSource;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;

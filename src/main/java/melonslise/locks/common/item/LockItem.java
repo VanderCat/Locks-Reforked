@@ -85,8 +85,9 @@ public class LockItem extends LockingItem {
 			return InteractionResult.PASS;
 		var lock = LocksComponents.LOCKED.get(ent);
 		lock.setLock(ctx.getItemInHand());
+		lock.setDirection(ctx.getClickedFace());
 		ctx.getPlayer().getInventory().removeItem(ctx.getItemInHand());
-		LocksComponents.LOCKED.sync(ent);
+		lock.sync();
 		return InteractionResult.SUCCESS;
 	}
 
