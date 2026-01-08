@@ -1,0 +1,53 @@
+{
+	"language.locks.translation_author": "VanderCat",
+	"itemGroup.locks.items": "Замки",
+	"item.locks.spring": "Пружина",
+	"item.locks.copper_lock_mechanism": "Медный Замочный Механизм",
+	"item.locks.iron_lock_mechanism": "Железный Замочный Механизм",
+	"item.locks.steel_lock_mechanism": "Стальной Замочный Механизм",
+	"item.locks.copper_lock": "Медный замок",
+	"item.locks.iron_lock": "Железный Замок",
+	"item.locks.steel_lock": "Стальной Замок",
+	"item.locks.gold_lock": "Золотой Замок",
+	"item.locks.diamond_lock": "Алмазный Замок",
+	"item.locks.netherite_lock": "Незеритовый Замой",
+	"item.locks.smart_netherite_lock": "Незеритовый Умный Замок",
+	"item.locks.copper_lock_pick": "Заколка-Отмычка",
+	"item.locks.iron_lock_pick": "Железная Отмычка",
+	"item.locks.steel_lock_pick": "Стальная Отмычка",
+	"item.locks.gold_lock_pick": "Золотая Отмычка",
+	"item.locks.diamond_lock_pick": "Алмазная Отмычка",
+	"item.locks.netherite_lock_pick": "Незеритовая Отмычка",
+	"item.locks.key": "Ключ",
+	"item.locks.master_key": "Мастер-Ключ",
+	"item.locks.key_blank": "Пустой Ключ",
+	"item.locks.key_ring": "Брелок",
+
+	"enchantment.locks.shocking": "Шокирующий",
+	"enchantment.locks.shocking.desc": "Бьет током вора, после неудачной попытки взломать замок",
+	"enchantment.locks.sturdy": "Крепкий",
+	"enchantment.locks.sturdy.desc": "Уменьшает эффективность отмычек",
+	"enchantment.locks.complexity": "Сложность",
+	"enchantment.locks.complexity.desc": "Не позволяет взломать этот замок более простыми отмычками",
+
+	"death.attack.locks.shock": "%1$s был электризован после неудачной попытки вскрыть замок",
+	"death.attack.locks.shock.player": "%1$s был электризован после неудачной попытки одновременно вскрыть замок и сражаться с %2$",
+
+	"locks.gui.lockpicking.title": "Взлом",
+	"locks.gui.lockpicking.open": "Нажмите `ESC` что бы открыть",
+
+	"locks.subtitle.key_ring": "Звон ключей",
+	"locks.subtitle.lock.close": "Замок открылся",
+	"locks.subtitle.lock.open": "Замок закрылся",
+	"locks.subtitle.lock.rattle": "Замок гремит",
+	"locks.subtitle.pin.fail": "Пин глухо звучит",
+	"locks.subtitle.pin.match": "Пин звонко звучит",
+	"locks.subtitle.shock": "Внезапный разряд",
+
+	"locks.tooltip.length":  "Длина: %s",
+	"locks.tooltip.strength": "Сила: %s",
+	"locks.tooltip.owner": "Владелец: %s",
+
+	"locks.status.locked": "Этот блок закрыт",
+	"locks.status.too_complex": "Этот замок слишком сложен для этой отмычки"
+}

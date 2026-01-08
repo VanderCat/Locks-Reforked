@@ -111,7 +111,7 @@ java {
 }
 
 jar {
-	from("LICENSE") {
+	from("LICENSE.MD") {
 		rename { "${it}_${project.archivesBaseName}" }
 	}
 }

@@ -1,7 +1,7 @@
 {
 	"language.locks.translation_author": "<Your name here>",
 
-	"itemGroup.locks": "Locks",
+	"itemGroup.locks.items": "Locks",
 
 	"item.locks.integrated_circuit": "Integrated Circuit",
 	"item.locks.spring": "Spring",

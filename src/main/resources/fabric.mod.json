@@ -1,18 +1,24 @@
 {
 	"schemaVersion": 1,
-	"id": "locks",
+	"id": "${mod_id}",
+    "provides": [
+      "locks"
+    ],
 	"version": "${version}",
-	"name": "Locks",
-	"description": "Locks is a small, but unique Minecraft mod that introduces flexible and universal locks which can be dynamically attached to multiple blocks of any kind, including other mods, a fun lock picking mechanic as well as lots of other little, but useful tools and utilities.",
+	"name": "Locks Rewritten",
+	"description": "Universal locks dynamically attached to Block Entities with a lock picking mechanic",
 	"authors": [
-		"Melonslise", "Kaleb Langley", "Yuqi154", "Parakoh", "VanderCat"
+      "VanderCat"
 	],
-	"contributors": [],
+	"contributors": [
+      "Melonslise", "Kaleb Langley", "Yuqi154", "Parakoh"
+    ],
 	"icon": "icon.png",
 	"accessWidener" : "locks.accesswidener",
 	"contact": {
-		"homepage": "https://modrinth.com/mod/locks-reforked",
-		"sources": "https://github.com/Paradojas/Locks-Reforked"
+      "homepage": "https://modrinth.com/mod/locks-rewritten",
+      "sources": "https://github.com/VanderCat/Locks-Rewritten",
+      "issues": "https://github.com/VanderCat/Locks-Rewritten/issues"
 	},
 	"license": "CC-BY-NC-3.0",
 	"environment": "*",
