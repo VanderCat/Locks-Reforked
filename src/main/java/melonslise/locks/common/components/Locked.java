@@ -3,11 +3,13 @@ package melonslise.locks.common.components;
 import dev.onyxstudios.cca.api.v3.component.Component;
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import dev.onyxstudios.cca.api.v3.component.tick.ClientTickingComponent;
+import melonslise.locks.common.event.LocksEvents;
 import melonslise.locks.common.init.LocksComponents;
 import melonslise.locks.common.item.LockItem;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.AbstractChestBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
 public class Locked implements Component, AutoSyncedComponent, ClientTickingComponent {
@@ -23,6 +25,15 @@ public class Locked implements Component, AutoSyncedComponent, ClientTickingComp
     public void setLock(ItemStack lock) {
         this.lock = lock;
     }
+
+    public static Locked getFrom(BlockEntity ent) {
+        if (ent.getBlockState().getBlock() instanceof AbstractChestBlock<?> chest) {
+            var possibleLock = chest.combine(ent.getBlockState(), ent.getLevel(), ent.getBlockPos(), true).apply(LocksEvents.LOCK_COMBINER);
+            if (possibleLock.isPresent())
+                return possibleLock.get();
+        }
+        return ent.getComponent(LocksComponents.LOCKED);
+    };
 
     public void setDirection(Direction direction) {
         this.direction = direction;

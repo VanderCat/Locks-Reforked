@@ -84,7 +84,7 @@ public class LockPickItem extends Item
 		var ent = world.getBlockEntity(pos);
 		if (ent == null)
 			return InteractionResult.PASS;
-		Locked lock = ent.getComponent(LocksComponents.LOCKED);
+		Locked lock = Locked.getFrom(ent);
 		var lockStack = lock.getLock();
 		if (lockStack == ItemStack.EMPTY)
 			return InteractionResult.PASS;

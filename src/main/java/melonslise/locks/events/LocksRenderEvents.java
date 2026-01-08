@@ -1,6 +1,7 @@
 package melonslise.locks.events;
 
 import melonslise.locks.Locks;
+import melonslise.locks.common.components.Locked;
 import melonslise.locks.common.init.LocksComponents;
 import melonslise.locks.common.init.LocksItemTags;
 import melonslise.locks.common.init.LocksItems;
@@ -39,7 +40,8 @@ public class LocksRenderEvents {
             var blockentity = level.getBlockEntity(blockpos);
             if (blockentity == null)
                 return;
-            var locked = blockentity.getComponent(LocksComponents.LOCKED);
+            var locked = Locked.getFrom(blockentity);
+
             var item = locked.getLock();
             if (item.isEmpty())
                 return;

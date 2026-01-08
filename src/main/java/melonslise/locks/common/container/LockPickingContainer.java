@@ -73,7 +73,7 @@ public class LockPickingContainer extends AbstractContainerMenu {
 			throw new NullPointerException("Attempt to open a lockpicking container on non-blockentity");
 		this.player = player;
 		this.hand = hand;
-		this.lock = be.getComponent(LocksComponents.LOCKED);
+		this.lock = Locked.getFrom(be);
 		this.pos = pos;
 		this.rng = new Random(LockItem.getOrSetId(this.lock.getLock()));
 		this.combo = shuffle(LockItem.getOrSetLength(this.lock.getLock()));
