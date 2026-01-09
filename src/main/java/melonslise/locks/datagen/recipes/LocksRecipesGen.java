@@ -53,13 +53,13 @@ public class LocksRecipesGen extends FabricRecipeProvider {
             .save(exporter);
 
         lock(LocksItems.GOLD_LOCK)
-            .define('#', Items.IRON_INGOT)
+            .define('#', Items.GOLD_INGOT)
             .define('@', LocksItems.STEEL_LOCK_MECHANISM)
                 .unlockedBy(getHasName(Items.GOLD_INGOT), has(Items.GOLD_INGOT))
             .save(exporter);
 
         lock(LocksItems.DIAMOND_LOCK)
-            .define('#', Items.IRON_INGOT)
+            .define('#', Items.DIAMOND)
             .define('@', LocksItems.STEEL_LOCK_MECHANISM)
                 .unlockedBy(getHasName(Items.DIAMOND), has(Items.DIAMOND))
             .save(exporter);

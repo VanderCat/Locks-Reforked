@@ -4,7 +4,7 @@
   "group": "locks",
   "key": {
     "#": {
-      "item": "minecraft:iron_ingot"
+      "item": "minecraft:diamond"
     },
     "@": {
       "item": "locks:steel_lock_mechanism"
@@ -16,7 +16,7 @@
     "###"
   ],
   "result": {
-    "item": "locks:gold_lock"
+    "item": "locks:diamond_lock"
   },
   "show_notification": true
 }

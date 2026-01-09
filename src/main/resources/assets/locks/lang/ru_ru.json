@@ -49,5 +49,24 @@
 	"locks.tooltip.owner": "Владелец: %s",
 
 	"locks.status.locked": "Этот блок закрыт",
-	"locks.status.too_complex": "Этот замок слишком сложен для этой отмычки"
+	"locks.status.too_complex": "Этот замок слишком сложен для этой отмычки",
+    "locks.status.wrong_key": "Этот ключ не помещается",
+
+	"text.config.locks.section.client": "Клиент",
+	"text.config.locks.option.deafMode": "Глухой режим",
+	"text.config.locks.option.deafMode.tooltip": "Показывать текст при попытке использовать закрытый блок",
+	"text.config.locks.option.overlay": "Показывать оверлей",
+	"text.config.locks.option.overlay.tooltip": "Показывать информацию о замке когда игрок держит отмычку",
+	"text.config.locks.section.generation": "Генерация",
+	"text.config.locks.option.randomizeLoadedLocks": "Рандомизировать замки",
+	"text.config.locks.option.randomizeLoadedLocks.tooltip": "Рандзомиризовать ID замков и комбинации при загрузке из файлов структур. Рандомизация работает как при генерации мира.",
+	"text.config.locks.section.server": "Сервер",
+	"text.config.locks.option.allowRemovingLocks": "Разрешить снимать замки",
+	"text.config.locks.option.allowRemovingLocks.tooltip": "Открытые замки могут быть сняты при взаимодействии с блоком в присяди",
+	"text.config.locks.option.protectLockables": "Защищать закрытые блоки",
+	"text.config.locks.option.protectLockables.tooltip": "Закрытые блоки не могут быть сломаны в выживании",
+	"text.config.locks.option.strongPrevention": "Сильная защита",
+	"text.config.locks.option.strongPrevention.tooltip": "Использовать более интрузивные способы защиты блока от ломания. Совместимость не гарантируется",
+	"text.config.locks.option.hideIdsFromClient": "Спрятать ID от игроков",
+	"text.config.locks.option.hideIdsFromClient.tooltip": "Прячет ID, которое видно со включенными расширенными подсказками"
 }

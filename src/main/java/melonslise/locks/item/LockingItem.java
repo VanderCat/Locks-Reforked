@@ -50,7 +50,7 @@ public class LockingItem extends Item
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> lines, TooltipFlag flag)
 	{
-		if(stack.hasTag() && stack.getTag().contains(KEY_ID))
-			lines.add(Component.translatable(Locks.ID + ".tooltip.id", ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(getOrSetId(stack))).withStyle(ChatFormatting.DARK_GREEN));
+		if(stack.hasTag() && stack.getTag().contains(KEY_ID) && flag.isAdvanced() && !Locks.CONFIG.hideIdsFromClient())
+			lines.add(Component.translatable(Locks.ID + ".tooltip.id", ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(getOrSetId(stack))).withStyle(ChatFormatting.GRAY));
 	}
 }

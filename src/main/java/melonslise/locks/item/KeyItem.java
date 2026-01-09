@@ -4,6 +4,7 @@ import melonslise.locks.Locks;
 import melonslise.locks.components.Locked;
 import melonslise.locks.init.LocksItemTags;
 import melonslise.locks.init.LocksSoundEvents;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.ItemStack;
@@ -46,7 +47,7 @@ public class KeyItem extends LockingItem
         locked.swing(20);
         world.playSound(player, be.getBlockPos(), LocksSoundEvents.LOCK_RATTLE, SoundSource.BLOCKS, 1f, 1f);
         if(Locks.CONFIG.deafMode())
-            player.displayClientMessage(LOCKED_MESSAGE, true);
+            player.displayClientMessage(Component.translatable(Locks.ID+".status.wrong_key"), true);
         return InteractionResult.FAIL;
 	}
 }

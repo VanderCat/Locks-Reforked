@@ -21,7 +21,7 @@ public class LocksConfigModel {
     @Sync(Option.SyncMode.OVERRIDE_CLIENT)
     public boolean protectLockables = true;
     @Sync(Option.SyncMode.OVERRIDE_CLIENT)
-    public boolean easyLock = true;
-    @Sync(Option.SyncMode.OVERRIDE_CLIENT)
     public boolean strongPrevention = false;
+    @Sync(Option.SyncMode.OVERRIDE_CLIENT)
+    public boolean hideIdsFromClient = false;
 }

@@ -3,7 +3,6 @@
 
 	"itemGroup.locks.items": "Locks",
 
-	"item.locks.integrated_circuit": "Integrated Circuit",
 	"item.locks.spring": "Spring",
     "item.locks.copper_lock_mechanism": "Copper Lock Mechanism",
 	"item.locks.iron_lock_mechanism": "Iron Lock Mechanism",
@@ -54,6 +53,7 @@
 
 	"locks.status.locked": "This block is locked",
 	"locks.status.too_complex": "This lock is too complex for this lock pick",
+    "locks.status.wrong_key": "This key does not fit",
 
 	"text.config.locks.section.client": "Client",
 
@@ -78,5 +78,7 @@
 	"text.config.locks.option.easyLock": "Easy Lock",
 	"text.config.locks.option.easyLock.tooltip": "Lock blocks with just one click! It's magic! (Cancel will probably fail spectacularly with custom doors, custom double chests, etc)",
 	"text.config.locks.option.strongPrevention": "Stronger Prevention",
-	"text.config.locks.option.strongPrevention.tooltip": "Use stronger checks to prevent blocks on locks from being broken, but its compatibility is unknown"
+	"text.config.locks.option.strongPrevention.tooltip": "Use stronger checks to prevent blocks on locks from being broken, but its compatibility is unknown",
+    "text.config.locks.option.hideIdsFromClient": "Hide IDs from Client",
+    "text.config.locks.option.hideIdsFromClient.tooltip": "Hides ID visible in advanced tooltips from players"
 }

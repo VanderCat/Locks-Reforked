@@ -1,9 +1,6 @@
 {
 	"schemaVersion": 1,
 	"id": "${mod_id}",
-    "provides": [
-      "locks"
-    ],
 	"version": "${version}",
 	"name": "Locks Rewritten",
 	"description": "Universal locks dynamically attached to Block Entities with a lock picking mechanic",
