@@ -1,10 +1,13 @@
 package melonslise.locks.item;
 
+import melonslise.locks.init.LocksSoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 
-public class MasterKeyItem extends Item
+public class MasterKeyItem extends KeyItem
 {
 	public MasterKeyItem(Properties props)
 	{
@@ -13,7 +16,7 @@ public class MasterKeyItem extends Item
 
 	// TODO Sound pitch
 	@Override
-	public InteractionResult useOn(UseOnContext ctx) {
-		return InteractionResult.SUCCESS;
-	}
+    public boolean canOpen(ItemStack key, ItemStack lock) {
+        return true;
+    }
 }

@@ -1,5 +1,6 @@
 package melonslise.locks.datagen.tags;
 
+import melonslise.locks.Locks;
 import melonslise.locks.init.LocksItemTags;
 import melonslise.locks.init.LocksItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -33,6 +34,8 @@ public class LocksItemTagsGen extends FabricTagProvider.ItemTagProvider {
                 .add(LocksItems.NETHERITE_LOCK_PICK);
 
         getOrCreateTagBuilder(LocksItemTags.KEYS)
-                .add(LocksItems.KEY);
+                .add(LocksItems.KEY)
+                .add(LocksItems.MASTER_KEY)
+                .add(LocksItems.KEY_RING);
     }
 }

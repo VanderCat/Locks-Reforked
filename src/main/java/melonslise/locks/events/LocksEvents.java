@@ -24,6 +24,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.DoubleBlockCombiner;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -86,16 +87,10 @@ public final class LocksEvents
 		var itemLock = lock.getLock();
 		if (itemLock.isEmpty())
 			return InteractionResult.PASS;
-		if (hasMatchingKey(itemLock, itemInHand, player)) {
-			world.playSound(player, pos, LocksSoundEvents.LOCK_OPEN, SoundSource.BLOCKS, 1f, 1f);
-			LockItem.toggleOpen(itemLock);
-			lock.sync();
-			return InteractionResult.SUCCESS;
-		}
 		if (LockItem.isOpen(itemLock)) {
 			//TODO: Allow removing generated locks instead of all locks
 			if(Locks.CONFIG.allowRemovingLocks()) {
-				if (player.isShiftKeyDown() && itemInHand.isEmpty()) {
+				if (player.isSecondaryUseActive() && itemInHand.isEmpty() ) {
 					world.playSound(player, pos, SoundEvents.IRON_DOOR_OPEN, SoundSource.BLOCKS, 0.8f, 0.8f + player.getRandom().nextFloat() * 0.4f);
 					player.swing(hand);
 					if(player instanceof ServerPlayer) {
@@ -105,48 +100,25 @@ public final class LocksEvents
 						world.addFreshEntity(itemEntity);
 						lock.removeLock();
 						lock.sync();
-						return InteractionResult.CONSUME;
+                        return InteractionResult.SUCCESS;
 					}
 				}
 			}
-			return InteractionResult.PASS;
+            return InteractionResult.PASS;
 		}
-		if (canLockpick(itemLock, itemInHand, player)) {
-			return InteractionResult.PASS;
-		}
+        if (itemInHand.is(LocksItemTags.KEYS) || itemInHand.is(LocksItemTags.LOCK_PICKS)) {
+            var ctx = new UseOnContext(world, player, hand, itemInHand, result);
+            var result1 = itemInHand.useOn(ctx);
+            if (result1.consumesAction()) {
+                return result1;
+            }
+        }
         player.swing(hand);
 		lock.swing(20);
 		world.playSound(player, result.getBlockPos(), LocksSoundEvents.LOCK_RATTLE, SoundSource.BLOCKS, 1f, 1f);
 		if(Locks.CONFIG.deafMode())
 			player.displayClientMessage(LOCKED_MESSAGE, true);
 		return InteractionResult.FAIL;
-	}
-
-	public static boolean canLockpick(ItemStack lock, ItemStack key, Player player) {
-		return key.is(LocksItemTags.LOCK_PICKS);
-	}
-
-	public static boolean hasMatchingKey(ItemStack lock, ItemStack key, Player player) {
-		if (!lock.is(LocksItemTags.LOCKS)) {
-			return false;
-		}
-		int lockId = LockingItem.getOrSetId(lock);
-
-		// Check if it's a matching key
-		if (key.is(LocksItemTags.KEYS)) {
-			int keyId = KeyItem.getOrSetId(key);
-			return lockId == keyId;
-		}
-
-		// Check if it's the master key
-		if (key.getItem() == LocksItems.MASTER_KEY)
-			return true;
-
-		// Check if it's a keyring containing the correct key
-		if (key.getItem() == LocksItems.KEY_RING)
-			return KeyRingItem.containsId(key, lockId);
-
-		return false;
 	}
 
 

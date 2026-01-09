@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
-    "locks:key"
+    "locks:key",
+    "locks:master_key",
+    "locks:key_ring"
   ]
 }

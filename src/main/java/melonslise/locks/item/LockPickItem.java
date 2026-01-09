@@ -70,19 +70,19 @@ public class LockPickItem extends Item
 	 */
 	@Override
 	public InteractionResult useOn(UseOnContext ctx) {
-		//Defines player, world, position of interacted block, and a list of possible locks interacted with.
-		Level world = ctx.getLevel();
-		Player player = ctx.getPlayer();
-		BlockPos pos = ctx.getClickedPos();
-		//List<Lockable> match = LocksUtil.intersecting(world, pos).filter(LocksPredicates.LOCKED).collect(Collectors.toList());
+		var world = ctx.getLevel();
+		var player = ctx.getPlayer();
+		var pos = ctx.getClickedPos();
 
 		var ent = world.getBlockEntity(pos);
 		if (ent == null)
 			return InteractionResult.PASS;
-		Locked lock = Locked.getFrom(ent);
+		var lock = Locked.getFrom(ent);
 		var lockStack = lock.getLock();
-		if (lockStack == ItemStack.EMPTY)
+		if (lockStack.isEmpty())
 			return InteractionResult.PASS;
+        if (lock.isOpen())
+            return InteractionResult.PASS;
 		if(!canPick(ctx.getItemInHand(), lockStack)) {
 			Locks.LOGGER.warn("Could not pick a lock");
 			if(world.isClientSide)
