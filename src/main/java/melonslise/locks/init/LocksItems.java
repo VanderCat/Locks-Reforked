@@ -33,12 +33,12 @@ public final class LocksItems implements ItemRegistryContainer {
             KEY = new KeyItem(new Item.Properties()),
             MASTER_KEY = new MasterKeyItem(new Item.Properties()),
             KEY_RING = new KeyRingItem(2, new Item.Properties()),
-            COPPER_LOCK_PICK = new LockPickItem(0.2f, new Item.Properties()),
-            IRON_LOCK_PICK = new LockPickItem(0.35f, new Item.Properties()),
-            STEEL_LOCK_PICK = new LockPickItem(0.7f, new Item.Properties()),
-            GOLD_LOCK_PICK = new LockPickItem(0.25f, new Item.Properties()),
-            DIAMOND_LOCK_PICK = new LockPickItem(0.85f, new Item.Properties()),
-            NETHERITE_LOCK_PICK = new LockPickItem(0.9f, new Item.Properties().fireResistant());
+            COPPER_LOCK_PICK = new LockPickItem(0.2f, 0, new Item.Properties()),
+            IRON_LOCK_PICK = new LockPickItem(0.35f, 1, new Item.Properties()),
+            STEEL_LOCK_PICK = new LockPickItem(0.7f, 2, new Item.Properties()),
+            GOLD_LOCK_PICK = new LockPickItem(0.25f, 2, new Item.Properties()),
+            DIAMOND_LOCK_PICK = new LockPickItem(0.85f, 3, new Item.Properties()),
+            NETHERITE_LOCK_PICK = new LockPickItem(0.9f, 4, new Item.Properties().fireResistant());
 
     public static final OwoItemGroup GROUP = OwoItemGroup
             .builder(new ResourceLocation(Locks.ID, "items"), () -> Icon.of(LocksItems.IRON_LOCK))

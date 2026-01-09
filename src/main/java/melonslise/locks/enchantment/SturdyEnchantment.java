@@ -8,9 +8,8 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory;
 
 public class SturdyEnchantment extends Enchantment
 {
-	public SturdyEnchantment()
-	{
-		super(Rarity.RARE,  EnchantmentCategory.BREAKABLE, new EquipmentSlot[] { EquipmentSlot.MAINHAND });
+	public SturdyEnchantment() {
+		super(Rarity.RARE,  EnchantmentCategory.BREAKABLE, new EquipmentSlot[] {});
 	}
 
 	@Override

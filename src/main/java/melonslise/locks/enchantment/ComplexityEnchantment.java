@@ -8,9 +8,8 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory;
 
 public class ComplexityEnchantment extends Enchantment
 {
-	public ComplexityEnchantment()
-	{
-		super(Rarity.VERY_RARE, EnchantmentCategory.BREAKABLE, new EquipmentSlot[] { EquipmentSlot.MAINHAND });
+	public ComplexityEnchantment() {
+		super(Rarity.VERY_RARE, EnchantmentCategory.BREAKABLE, new EquipmentSlot[] {});
 	}
 
 	@Override

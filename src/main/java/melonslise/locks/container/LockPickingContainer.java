@@ -231,23 +231,6 @@ public class LockPickingContainer extends AbstractContainerMenu {
 		new LockPickingContainer(id, inv.player, buf.readEnum(InteractionHand.class), buf.readBlockPos());
 
 
-	//Network
-//	public static class Writer implements Consumer<FriendlyByteBuf> {
-//		public final InteractionHand hand;
-//		public final Lock lock;
-//
-//		public Writer(InteractionHand hand, Lock lkb) {
-//			this.hand = hand;
-//			this.lock = lkb;
-//		}
-//
-//		@Override
-//		public void accept(FriendlyByteBuf buf) {
-//			buf.writeEnum(this.hand);
-//			buf.writeInt(this.lock.id);
-//		}
-//	}
-
 	public static class Provider implements ExtendedScreenHandlerFactory {
 		public final ItemStack lockItem;
 		public final InteractionHand hand;

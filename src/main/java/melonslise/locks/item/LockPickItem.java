@@ -27,15 +27,17 @@ public class LockPickItem extends Item
 {
 	public static final Component TOO_COMPLEX_MESSAGE = Component.translatable(Locks.ID + ".status.too_complex");
 
-	public final float strength;
+	private final float strength;
+    private final int tier;
 
-	public LockPickItem(float strength, Properties props)
-	{
+	public LockPickItem(float strength, int tier, Properties props) {
 		super(props);
 		this.strength = strength;
+        this.tier = tier;
 	}
 
-	public static final String KEY_STRENGTH = "Strength";
+	private static final String KEY_STRENGTH = "strength";
+    private static final String KEY_TIER = "tier";
 
 	// WARNING: EXPECTS LOCKPICKITEM STACK
 	public static float getOrSetStrength(ItemStack stack) {
@@ -45,20 +47,25 @@ public class LockPickItem extends Item
 		return nbt.getFloat(KEY_STRENGTH);
 	}
 
+    public static float getOrSetTier(ItemStack stack) {
+        CompoundTag nbt = stack.getOrCreateTag();
+        if(!nbt.contains(KEY_TIER))
+            nbt.putFloat(KEY_TIER, ((LockPickItem)stack.getItem()).tier);
+        return nbt.getFloat(KEY_TIER);
+    }
+
 	/**
 	 *	Verifies if the lockpick is able to bypass the complexity due to its strength.
 	 *
 	 * @param stack - The lock pick
-	 * @param cmp - The enchantment level of complexity within the lock
+	 * @param level - The enchantment level of complexity within the lock
 	 * @return - Whether it can lock pick or not
 	 */
-	public static boolean canPick(ItemStack stack, int cmp)
-	{
-		return (getOrSetStrength(stack) > cmp * 0.25f);
+	public static boolean canPick(ItemStack stack, int level) {
+		return (getOrSetTier(stack) >= level);
 	}
 
-	public static boolean canPick(ItemStack lockpick, ItemStack lock)
-	{
+	public static boolean canPick(ItemStack lockpick, ItemStack lock) {
 		return canPick(lockpick, EnchantmentHelper.getItemEnchantmentLevel(LocksEnchantments.COMPLEXITY, lock));
 	}
 

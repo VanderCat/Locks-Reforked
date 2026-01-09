@@ -8,9 +8,8 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory;
 
 public class ShockingEnchantment extends Enchantment
 {
-	public ShockingEnchantment()
-	{
-		super(Rarity.UNCOMMON, EnchantmentCategory.BREAKABLE, new EquipmentSlot[] { EquipmentSlot.MAINHAND });
+	public ShockingEnchantment() {
+        super(Rarity.UNCOMMON, EnchantmentCategory.BREAKABLE, new EquipmentSlot[] {});
 	}
 
 	@Override

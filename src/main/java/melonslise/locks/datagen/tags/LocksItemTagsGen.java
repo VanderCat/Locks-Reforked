@@ -23,12 +23,14 @@ public class LocksItemTagsGen extends FabricTagProvider.ItemTagProvider {
                 .add(LocksItems.COPPER_LOCK)
                 .add(LocksItems.IRON_LOCK)
                 .add(LocksItems.GOLD_LOCK)
+                .add(LocksItems.STEEL_LOCK)
                 .add(LocksItems.DIAMOND_LOCK)
                 .add(LocksItems.NETHERITE_LOCK);
 
         getOrCreateTagBuilder(LocksItemTags.LOCK_PICKS)
                 .add(LocksItems.COPPER_LOCK_PICK)
                 .add(LocksItems.IRON_LOCK_PICK)
+                .add(LocksItems.STEEL_LOCK_PICK)
                 .add(LocksItems.GOLD_LOCK_PICK)
                 .add(LocksItems.DIAMOND_LOCK_PICK)
                 .add(LocksItems.NETHERITE_LOCK_PICK);

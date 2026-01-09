@@ -1,4 +1,4 @@
-// 1.20.1	2026-01-09T04:22:45.673895366	Locks Rewritten/Recipes
+// 1.20.1	2026-01-09T13:22:12.291405937	Locks Rewritten/Recipes
 52853a76d8bf50c92132ea0fb7fbfb445a52fa60 data/locks-reforked/recipes/copper_lock_mechanism.json
 b91c156965b661bc9dcd5bd1590469de6221a3c5 data/locks-reforked/recipes/diamond_lock.json
 d5d53b4e66a268030b51969716549885e310ee16 data/locks-reforked/advancements/recipes/misc/copper_lock.json
@@ -8,16 +8,16 @@ ea8020aad4c54d53475e6efc5ed71206546a6246 data/locks-reforked/recipes/iron_lock_p
 a1fc1497cc93e3f444215f803972cc1e01be4534 data/locks-reforked/recipes/key_blank.json
 9e6efb0461e01c53057f21aeff4228afe55928cf data/locks-reforked/advancements/recipes/tools/copper_lock_pick.json
 5be8c506d8553aff4174f80cc471994d9c759cb3 data/locks-reforked/advancements/recipes/tools/iron_lock_pick.json
-7458ac783d72b64f1231101deb7e430fbd78467c data/locks-reforked/recipes/gold_lock_pick.json
 47c574aa7935b2e5c4984d83e374d2de0481af3e data/locks-reforked/recipes/copper_lock_pick.json
+7458ac783d72b64f1231101deb7e430fbd78467c data/locks-reforked/recipes/gold_lock_pick.json
 a4d5baac8117b85d48f3ab52c5762896b330404c data/locks-reforked/recipes/netherite_lock.json
 bda4de697453f77ba966c0a624611b2cca0b7cdb data/locks-reforked/recipes/gold_lock.json
 e07b5b20b8eb4b09f88dbb178428a74dd9fb8e5e data/locks-reforked/advancements/recipes/misc/iron_lock_mechanism.json
 3f31f3da05dd990d63413976cec4120064e71b4a data/locks-reforked/advancements/recipes/misc/netherite_lock_pick.json
 bd5741ef11df84a784cb0958f4cec694c5416d07 data/locks-reforked/recipes/netherite_lock_pick.json
 3620300dd402c68d475666f7c52270e17ae700e1 data/locks-reforked/advancements/recipes/misc/spring.json
-886f0486121be91be325aa95e329cfc8e8e6e71a data/locks-reforked/advancements/recipes/tools/gold_lock_pick.json
 12cb97d3f027b2409b5bda9559541c9696198498 data/locks-reforked/recipes/iron_lock_mechanism.json
+886f0486121be91be325aa95e329cfc8e8e6e71a data/locks-reforked/advancements/recipes/tools/gold_lock_pick.json
 0a3f858bc74dface02c9d5041c71f773245d749c data/locks-reforked/recipes/key_ring.json
 cd7736c0ade87bc7a221c6283be8c30bdc9baf31 data/locks-reforked/advancements/recipes/tools/key_blank.json
 a4c9ce1f6cb0271033bb40bda7f00882ef60e4e9 data/locks-reforked/advancements/recipes/misc/iron_lock.json
