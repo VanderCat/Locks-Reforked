@@ -1,6 +1,5 @@
 package melonslise.locks.mixin;
 
-import melonslise.locks.components.Locked;
 import melonslise.locks.init.LocksComponents;
 import melonslise.locks.init.LocksItemTags;
 import net.minecraft.core.BlockPos;
@@ -26,8 +25,8 @@ public class OnBlockUseMixin {
         var be = level.getBlockEntity(blockHitResult.getBlockPos());
         if (be == null)
             return;
-        if (Locked.getFrom(be).getLock().isEmpty())
-            return;
+//        if (Locked.getFrom(be).getLock().isEmpty())
+//            return;
         var item = player.getItemInHand(interactionHand);
         if (item.isEmpty())
             return;

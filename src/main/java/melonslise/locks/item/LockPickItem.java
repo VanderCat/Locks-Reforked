@@ -1,7 +1,7 @@
 package melonslise.locks.item;
 
 import melonslise.locks.Locks;
-import melonslise.locks.components.Locked;
+import melonslise.locks.components.AbstractLocked;
 import melonslise.locks.container.LockPickingContainer;
 import melonslise.locks.init.LocksEnchantments;
 import net.fabricmc.api.EnvType;
@@ -81,10 +81,9 @@ public class LockPickItem extends Item
 		var player = ctx.getPlayer();
 		var pos = ctx.getClickedPos();
 
-		var ent = world.getBlockEntity(pos);
-		if (ent == null)
-			return InteractionResult.PASS;
-		var lock = Locked.getFrom(ent);
+		var lock = AbstractLocked.getFrom(world, pos);
+        if (lock == null)
+            return InteractionResult.PASS;
 		var lockStack = lock.getLock();
 		if (lockStack.isEmpty())
 			return InteractionResult.PASS;

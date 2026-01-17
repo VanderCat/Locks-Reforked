@@ -2,7 +2,7 @@ package melonslise.locks.container;
 
 import melonslise.locks.Locks;
 import melonslise.locks.client.gui.LockPickingScreen;
-import melonslise.locks.components.Locked;
+import melonslise.locks.components.AbstractLocked;
 import melonslise.locks.init.*;
 import melonslise.locks.item.LockItem;
 import melonslise.locks.item.LockPickItem;
@@ -21,6 +21,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -50,7 +51,7 @@ public class LockPickingContainer extends AbstractContainerMenu {
 
 	public final Player player;
 	public final InteractionHand hand;
-	public final Locked lock;
+	public final AbstractLocked lock;
 
 	public final BlockPos pos;
 
@@ -67,11 +68,12 @@ public class LockPickingContainer extends AbstractContainerMenu {
 		super(LocksContainerTypes.LOCK_PICKING, id);
 		var level = player.level();
 		var be = level.getBlockEntity(pos);
-		if (be == null)
-			throw new NullPointerException("Attempt to open a lockpicking container on non-blockentity");
+        this.lock = AbstractLocked.getFrom(level, pos);
+        if (this.lock == null)
+            throw new NullPointerException("Attempt to open a lockpicking container on non-blockentity");
 		this.player = player;
 		this.hand = hand;
-		this.lock = Locked.getFrom(be);
+
 		this.pos = pos;
 		this.rng = new Random(LockItem.getOrSetId(this.lock.getLock()));
 		this.combo = shuffle(LockItem.getOrSetLength(this.lock.getLock()));
@@ -79,13 +81,6 @@ public class LockPickingContainer extends AbstractContainerMenu {
 		this.shocking = EnchantmentHelper.getItemEnchantmentLevel(LocksEnchantments.SHOCKING, this.lock.getLock());
 		this.sturdy = EnchantmentHelper.getItemEnchantmentLevel(LocksEnchantments.STURDY, this.lock.getLock());
 		this.complexity = EnchantmentHelper.getItemEnchantmentLevel(LocksEnchantments.COMPLEXITY, this.lock.getLock());
-
-//		for (int rows = 0; rows < 3; ++rows)
-//			for (int cols = 0; cols < 9; ++cols)
-//				this.addSlot(new HiddenSlot(player.getInventory(), cols + rows * 9 + 9, 0, 0));
-//
-//		for (int slots = 0; slots < 9; ++slots)
-//			this.addSlot(new HiddenSlot(player.getInventory(), slots, 0, 0));
 	}
 
 

@@ -1,7 +1,7 @@
 package melonslise.locks.item;
 
 import melonslise.locks.Locks;
-import melonslise.locks.components.Locked;
+import melonslise.locks.components.AbstractLocked;
 import melonslise.locks.init.LocksItemTags;
 import melonslise.locks.init.LocksSoundEvents;
 import net.minecraft.network.chat.Component;
@@ -28,24 +28,22 @@ public class KeyItem extends LockingItem
 	public InteractionResult useOn(UseOnContext ctx) {
         var world = ctx.getLevel();
         var player = ctx.getPlayer();
-        var be = world.getBlockEntity(ctx.getClickedPos());
-        if (be == null)
-            return InteractionResult.PASS;
-        var locked = Locked.getFrom(be);
+        var pos = ctx.getClickedPos();
+        var locked = AbstractLocked.getFrom(world, pos);
         var itemLock = locked.getLock();
         if (itemLock.isEmpty())
             return InteractionResult.PASS;
         if (locked.isOpen() && !player.isSecondaryUseActive())
             return InteractionResult.PASS;
         if (canOpen(ctx.getItemInHand(), itemLock)) {
-            world.playSound(player, be.getBlockPos(), LocksSoundEvents.LOCK_OPEN, SoundSource.BLOCKS, 1f, 1f);
+            world.playSound(player, pos, LocksSoundEvents.LOCK_OPEN, SoundSource.BLOCKS, 1f, 1f);
             LockItem.toggleOpen(itemLock);
             locked.sync();
             return InteractionResult.SUCCESS;
         }
 
         locked.swing(20);
-        world.playSound(player, be.getBlockPos(), LocksSoundEvents.LOCK_RATTLE, SoundSource.BLOCKS, 1f, 1f);
+        world.playSound(player, pos, LocksSoundEvents.LOCK_RATTLE, SoundSource.BLOCKS, 1f, 1f);
         if(Locks.CONFIG.deafMode())
             player.displayClientMessage(Component.translatable(Locks.ID+".status.wrong_key"), true);
         return InteractionResult.FAIL;

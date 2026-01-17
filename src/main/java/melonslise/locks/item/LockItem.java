@@ -1,6 +1,7 @@
 package melonslise.locks.item;
 
 import melonslise.locks.Locks;
+import melonslise.locks.components.AbstractLocked;
 import melonslise.locks.init.LocksComponents;
 import melonslise.locks.init.LocksSoundEvents;
 import melonslise.locks.util.*;
@@ -68,12 +69,11 @@ public class LockItem extends LockingItem {
 	public InteractionResult useOn(UseOnContext ctx) {
 		var world = ctx.getLevel();
 		var pos = ctx.getClickedPos();
-		var ent = world.getBlockEntity(pos);
-		if (ent == null)
-			return InteractionResult.FAIL;
 		if (!LocksUtil.canLock(world, pos))
 			return InteractionResult.PASS;
-		var lock = LocksComponents.LOCKED.get(ent);
+		var lock = AbstractLocked.getFrom(world, pos);
+        if (lock == null)
+            return InteractionResult.FAIL;
 		lock.setLock(ctx.getItemInHand());
 		lock.setDirection(ctx.getClickedFace());
 		ctx.getPlayer().getInventory().removeItem(ctx.getItemInHand());
@@ -87,7 +87,7 @@ public class LockItem extends LockingItem {
 		if(!isOpen(stack))
 			return super.use(world, player, hand);
 		setOpen(stack, false);
-		world.playSound(player, player.getX(), player.getY(), player.getZ(), LocksSoundEvents.PIN_MATCH, SoundSource.PLAYERS, 1f, 1f);
+		world.playSound(player, player.getX(), player.getY(), player.getZ(), LocksSoundEvents.LOCK_CLOSE, SoundSource.PLAYERS, 1f, 1f);
 		return super.use(world, player, hand);
 	}
 

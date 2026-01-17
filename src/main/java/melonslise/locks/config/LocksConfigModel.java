@@ -13,9 +13,6 @@ public class LocksConfigModel {
     @SectionHeader("generation")
     public boolean randomizeLoadedLocks = true;
     @SectionHeader("server")
-    @RangeConstraint(min = 1, max = 128)
-    @Sync(Option.SyncMode.OVERRIDE_CLIENT)
-    public int maxLockableVolume = 6;
     @Sync(Option.SyncMode.OVERRIDE_CLIENT)
     public boolean allowRemovingLocks = true;
     @Sync(Option.SyncMode.OVERRIDE_CLIENT)
@@ -24,4 +21,6 @@ public class LocksConfigModel {
     public boolean strongPrevention = false;
     @Sync(Option.SyncMode.OVERRIDE_CLIENT)
     public boolean hideIdsFromClient = false;
+    @Sync(Option.SyncMode.OVERRIDE_CLIENT)
+    public boolean nonBlockEntityLocking = false;
 }

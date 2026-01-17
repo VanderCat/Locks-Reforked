@@ -28,6 +28,5 @@ public final class LocksItemModelsProperties {
 		ItemProperties.register(LocksItems.GOLD_LOCK, id, getter);
 		ItemProperties.register(LocksItems.DIAMOND_LOCK, id, getter);
 		ItemProperties.register(LocksItems.NETHERITE_LOCK, id, getter);
-		//ItemProperties.register(LocksItems.SMART_NETHERITE_LOCK, id, getter);
 	}
 }

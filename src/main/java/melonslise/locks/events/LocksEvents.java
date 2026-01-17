@@ -1,7 +1,7 @@
 package melonslise.locks.events;
 
 import melonslise.locks.Locks;
-import melonslise.locks.components.Locked;
+import melonslise.locks.components.AbstractLocked;
 import melonslise.locks.init.LocksComponents;
 import melonslise.locks.init.LocksItemTags;
 import melonslise.locks.init.LocksItems;
@@ -41,20 +41,20 @@ public final class LocksEvents
 {
 	public static final Component LOCKED_MESSAGE = Component.translatable(Locks.ID + ".status.locked");
 
-    public static final DoubleBlockCombiner.Combiner<BlockEntity, Optional<Locked>> LOCK_COMBINER =
+    public static final DoubleBlockCombiner.Combiner<BlockEntity, Optional<AbstractLocked>> LOCK_COMBINER =
         new DoubleBlockCombiner.Combiner<>() {
-            public Optional<Locked> acceptDouble(BlockEntity blockEntity, BlockEntity blockEntity2) {
+            public Optional<AbstractLocked> acceptDouble(BlockEntity blockEntity, BlockEntity blockEntity2) {
                 var locked = blockEntity.getComponent(LocksComponents.LOCKED);
                 if (locked.getLock().isEmpty())
                     return Optional.of(blockEntity2.getComponent(LocksComponents.LOCKED));
                 return Optional.of(locked);
             }
 
-            public Optional<Locked> acceptSingle(BlockEntity blockEntity) {
+            public Optional<AbstractLocked> acceptSingle(BlockEntity blockEntity) {
                 return Optional.of(blockEntity.getComponent(LocksComponents.LOCKED));
             }
 
-            public Optional<Locked> acceptNone() {
+            public Optional<AbstractLocked> acceptNone() {
                 return Optional.empty();
             }
     };
@@ -78,11 +78,10 @@ public final class LocksEvents
 
 	public static InteractionResult onRightClick(Player player, Level world, InteractionHand hand, BlockHitResult result) {
 		var pos = result.getBlockPos();
-		var ent = world.getBlockEntity(pos);
-		if (ent == null)
-			return InteractionResult.PASS;
 
-        var lock = Locked.getFrom(ent);
+        var lock = AbstractLocked.getFrom(world, pos);
+        if (lock == null)
+            return InteractionResult.PASS;
 		var itemInHand = player.getItemInHand(hand);
 		var itemLock = lock.getLock();
 		if (itemLock.isEmpty())
@@ -122,12 +121,14 @@ public final class LocksEvents
 	}
 
 
-	public static boolean canBreakLockable(Player player, @Nullable BlockEntity entity) {
+	public static boolean canBreakLockable(Player player, Level world, BlockPos pos, @Nullable BlockEntity entity) {
         if (entity == null)
             return true;
         if (!Locks.CONFIG.protectLockables())
             return true;
-		var locked = Locked.getFrom(entity);
+		var locked = AbstractLocked.getFrom(world, pos);
+        if (locked == null)
+            return true;
         if (player.isCreative())
             return true;
         if (!locked.isOpen())
@@ -136,13 +137,13 @@ public final class LocksEvents
 	}
 
 	public static boolean onBlockBreaking(Level world, Player player, BlockPos pos, BlockState state,@Nullable BlockEntity entity) {
-        return canBreakLockable(player, entity);
+        return canBreakLockable(player, world, pos, entity);
 	}
 
     private static InteractionResult onAttackBlock(Player player, Level world, InteractionHand hand, BlockPos pos, Direction direction) {
         if (player.isSpectator())
             return InteractionResult.PASS;
-        if (!canBreakLockable(player, world.getBlockEntity(pos)))
+        if (!canBreakLockable(player, world, pos, world.getBlockEntity(pos)))
             return InteractionResult.FAIL;
         return InteractionResult.PASS;
     }

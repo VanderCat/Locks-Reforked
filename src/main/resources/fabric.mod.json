@@ -54,7 +54,8 @@
 	},
 	"custom": {
 		"cardinal-components": [
-			"locks:locked"
+			"locks:locked",
+            "locks:chunk_locked"
 		]
 	}
 }
