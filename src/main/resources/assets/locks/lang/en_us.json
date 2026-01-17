@@ -55,6 +55,9 @@
 	"locks.status.too_complex": "This lock is too complex for this lock pick",
     "locks.status.wrong_key": "This key does not fit",
 
+    "locks.jade.locked": "Locked",
+    "locks.jade.unlocked": "Unlocked",
+
 	"text.config.locks.section.client": "Client",
 
 	"text.config.locks.option.deafMode": "Deaf Mode",
@@ -80,5 +83,12 @@
 	"text.config.locks.option.strongPrevention": "Stronger Prevention",
 	"text.config.locks.option.strongPrevention.tooltip": "Use stronger checks to prevent blocks on locks from being broken, but its compatibility is unknown",
     "text.config.locks.option.hideIdsFromClient": "Hide IDs from Client",
-    "text.config.locks.option.hideIdsFromClient.tooltip": "Hides ID visible in advanced tooltips from players"
+    "text.config.locks.option.hideIdsFromClient.tooltip": "Hides ID visible in advanced tooltips from players",
+    "text.config.locks.option.nonBlockEntityLocking": "Enable Experimental Block Locking",
+    "text.config.locks.option.nonBlockEntityLocking.tooltip": "Enables experimental locking for blocks without block entities e.g. doors, trapdoors, anvils, etc.",
+    "config.jade.plugin_locks.lock_picking_tool": "Lock Pick Level",
+    "config.jade.plugin_locks.lock_picking_tool.creative": "Show in Creative Mode",
+    "config.jade.plugin_locks.lock": "Lock Status",
+    "config.jade.plugin_locks.lock.show_info": "Full Info",
+    "config.jade.plugin_locks.lock.always_show_info": "Always Show Full Info"
 }

@@ -52,6 +52,9 @@
 	"locks.status.too_complex": "Этот замок слишком сложен для этой отмычки",
     "locks.status.wrong_key": "Этот ключ не помещается",
 
+    "locks.jade.locked": "Закрыто",
+    "locks.jade.unlocked": "Открыто",
+
 	"text.config.locks.section.client": "Клиент",
 	"text.config.locks.option.deafMode": "Глухой режим",
 	"text.config.locks.option.deafMode.tooltip": "Показывать текст при попытке использовать закрытый блок",
@@ -68,5 +71,12 @@
 	"text.config.locks.option.strongPrevention": "Сильная защита",
 	"text.config.locks.option.strongPrevention.tooltip": "Использовать более интрузивные способы защиты блока от ломания. Совместимость не гарантируется",
 	"text.config.locks.option.hideIdsFromClient": "Спрятать ID от игроков",
-	"text.config.locks.option.hideIdsFromClient.tooltip": "Прячет ID, которое видно со включенными расширенными подсказками"
+	"text.config.locks.option.hideIdsFromClient.tooltip": "Прячет ID, которое видно со включенными расширенными подсказками",
+    "text.config.locks.option.nonBlockEntityLocking": "Эксперементальное закрытие блоков",
+    "text.config.locks.option.nonBlockEntityLocking.tooltip": "Включает эксперементальную возможность повесить замок на блоки без блок энтити, например двери",
+    "config.jade.plugin_locks.lock_picking_tool": "Уровень Отмычки",
+    "config.jade.plugin_locks.lock_picking_tool.creative": "Показывать в Творческом Режиме",
+    "config.jade.plugin_locks.lock": "Статус Замка",
+    "config.jade.plugin_locks.lock.show_info": "Полная Информация",
+    "config.jade.plugin_locks.lock.always_show_info": "Всегда Показывать Полную Информацию"
 }

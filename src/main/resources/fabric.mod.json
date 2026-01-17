@@ -31,7 +31,8 @@
 		],
 		"cardinal-components": ["melonslise.locks.init.LocksComponents"],
 		"jei_mod_plugin": ["melonslise.locks.compat.jei.LocksJeiPlugin"],
-		"rei_client": ["melonslise.locks.compat.rei.LocksReiPlugin"]
+		"rei_client": ["melonslise.locks.compat.rei.LocksReiPlugin"],
+        "jade": ["melonslise.locks.compat.jade.LocksWailaPlugin"]
 	},
 	"mixins": [
         "locks.mixins.json",
