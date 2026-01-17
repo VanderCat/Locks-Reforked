@@ -55,6 +55,8 @@ public class ChunkLocked implements Component, AutoSyncedComponent, ClientTickin
 
     @Override
     public void readFromNbt(CompoundTag tag) {
+        if (!Locks.CONFIG.nonBlockEntityLocking())
+            return;
         locks.clear();
         var list = tag.getList("locks", Tag.TAG_COMPOUND);
         for (var t : list) {
@@ -68,6 +70,8 @@ public class ChunkLocked implements Component, AutoSyncedComponent, ClientTickin
 
     @Override
     public void writeToNbt(CompoundTag tag) {
+        if (!Locks.CONFIG.nonBlockEntityLocking())
+            return;
         ListTag list = new ListTag();
         for (var e : locks.entrySet()) {
             BlockPos pos = e.getKey();

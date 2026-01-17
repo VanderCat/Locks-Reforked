@@ -1,4 +1,9 @@
 {
   "feature": "locks:lock",
-  "placement": []
+  "placement": [
+    {
+      "type": "locks:scan_for_tag",
+      "tag": "locks:treasure"
+    }
+  ]
 }

@@ -65,6 +65,7 @@ dependencies {
 	modImplementation "curse.maven:lootr-fabric-615106:5639247"
 	modImplementation "tschipp.carryon:carryon-fabric-1.20.1:2.1.2.7"
     modImplementation "maven.modrinth:jade:${project.jade_version}"
+    modImplementation "maven.modrinth:spark:${project.spark_version}"
 
 	modRuntimeOnly "curse.maven:uwrad-821683:4410962"
 	modRuntimeOnly "me.shedaniel.cloth:cloth-config-fabric:11.0.99"
