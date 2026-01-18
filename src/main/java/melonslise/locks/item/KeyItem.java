@@ -30,6 +30,8 @@ public class KeyItem extends LockingItem
         var player = ctx.getPlayer();
         var pos = ctx.getClickedPos();
         var locked = AbstractLocked.getFrom(world, pos);
+        if (locked == null)
+            return InteractionResult.PASS;
         var itemLock = locked.getLock();
         if (itemLock.isEmpty())
             return InteractionResult.PASS;

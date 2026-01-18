@@ -44,20 +44,20 @@ public final class LocksItems implements ItemRegistryContainer {
             .builder(new ResourceLocation(Locks.ID, "items"), () -> Icon.of(LocksItems.IRON_LOCK))
             .initializer(owoItemGroup -> {
                 owoItemGroup.tabs.add(new ItemGroupTab(Icon.of(ItemStack.EMPTY), Component.empty(), (context, entries) -> {
-                    entries.accept(SPRING);
                     entries.accept(COPPER_LOCK_MECHANISM);
                     entries.accept(IRON_LOCK_MECHANISM);
                     entries.accept(STEEL_LOCK_MECHANISM);
-                    entries.accept(KEY_BLANK);
                     entries.accept(COPPER_LOCK);
                     entries.accept(IRON_LOCK);
                     entries.accept(STEEL_LOCK);
                     entries.accept(GOLD_LOCK);
                     entries.accept(DIAMOND_LOCK);
                     entries.accept(NETHERITE_LOCK);
-                    entries.accept(KEY);
+                    entries.accept(SPRING);
+                    entries.accept(KEY_BLANK);
+                    //entries.accept(KEY);
                     entries.accept(MASTER_KEY);
-                    entries.accept(KEY_RING);
+                    //entries.accept(KEY_RING);
                     entries.accept(COPPER_LOCK_PICK);
                     entries.accept(IRON_LOCK_PICK);
                     entries.accept(STEEL_LOCK_PICK);

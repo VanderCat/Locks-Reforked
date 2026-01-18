@@ -34,6 +34,7 @@ public final class Locks implements ModInitializer, ClientModInitializer {
 		FieldRegistrationHandler.register(LocksRecipeSerializers.class, ID, false);
 		LocksVillagerTrades.register();
 		LocksEvents.register();
+        LocksNetwork.registerClientbound();
 		LocksNetwork.registerServerbound();
 		LocksFeatures.register();
 		LocksLootParamSets.register();
@@ -43,7 +44,6 @@ public final class Locks implements ModInitializer, ClientModInitializer {
 	public void onInitializeClient() {
 		LocksScreens.register();
 		LocksItemModelsProperties.register();
-		LocksNetwork.registerClientbound();
 		LocksRenderEvents.register();
 	}
 }
