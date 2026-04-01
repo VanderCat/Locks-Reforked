@@ -47,7 +47,8 @@
 		"cardinal-components-item": ">=5.2.2",
 		"cardinal-components-entity": ">=5.2.2",
 		"cardinal-components-world": ">=5.2.2",
-		"cardinal-components-chunk": ">=5.2.2"
+		"cardinal-components-chunk": ">=5.2.2",
+		"owo": ">=0.11.2"
 	},
 	"suggests": {
 		"jei": ">=15.17.0.0",
