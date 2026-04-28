@@ -16,6 +16,9 @@ import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -169,25 +172,31 @@ public class LockPickingContainer extends AbstractContainerMenu {
 	}
 	//TODO: if player has increased luck, lower the chance of pin breaking and make it optional
 	protected boolean tryBreakPick(Player player, int pin) {
-		//是否断开工具
-		ItemStack pickStack = player.getItemInHand(this.hand);
-		float sturdyModifier = this.sturdy == 0 ? 1f : 0.75f + this.sturdy * 0.5f;
-		float ch = LockPickItem.getOrSetStrength(pickStack) / sturdyModifier;
-		float ex = (1f - ch) * (1f - this.getBreakChanceMultiplier(pin));
-		if (!pickStack.is(LocksItemTags.LOCK_PICKS) || player.getRandom().nextFloat() < ex + ch)
+		var pickStack = player.getItemInHand(this.hand);
+
+		var sturdy = this.sturdy == 0 ? 1f : 0.75f + this.sturdy * 0.5f;
+		var breakChance = LockPickItem.getOrSetStrength(pickStack) / sturdy;
+		var pinChance = (1f - breakChance) * (1f - this.getBreakChanceMultiplier(pin));
+
+		if (player.getRandom().nextFloat() < breakChance + pinChance)
 			return false;
+
 		this.player.broadcastBreakEvent(this.hand);
 		pickStack.shrink(1);
-		if (pickStack.isEmpty())
-			for (int a = 0; a < player.getInventory().getContainerSize(); ++a) {
-				ItemStack stack = player.getInventory().getItem(a);
-				if (this.isValidPick(stack)) {
-					player.setItemInHand(hand, stack);
-					player.getInventory().removeItemNoUpdate(a);
-					break;
-				}
-			}
 		return true;
+
+//		if (pickStack.isEmpty())
+//			for (int a = 0; a < player.getInventory().getContainerSize(); ++a) {
+//				ItemStack stack = player.getInventory().getItem(a);
+//				if (this.isValidPick(stack)) {
+//					if (!stack.is(wasItem))
+//						continue;
+//					player.setItemInHand(hand, stack);
+//					player.getInventory().removeItemNoUpdate(a);
+//					break;
+//				}
+//			}
+//		return true;
 	}
 
 	/*
