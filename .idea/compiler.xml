@@ -56,7 +56,7 @@
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.fabricmc.fabric-api/fabric-sound-api-v1/1.0.12+b3afc78b77/87ea87c1cbf907d444d1cad45ecf62720df76e89/fabric-sound-api-v1-1.0.12+b3afc78b77.jar" />
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.fabricmc.fabric-api/fabric-transitive-access-wideners-v1/4.2.0+b3afc78b77/43777c38c236520087648fe163bdc83916362554/fabric-transitive-access-wideners-v1-4.2.0+b3afc78b77.jar" />
         </processorPath>
-        <module name="Locks-Reforked.main" />
+        <module name="Locks-Rewritten.main" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="17" />
@@ -65,6 +65,7 @@
     <option name="ADDITIONAL_OPTIONS_STRING" value="-AoutRefMapFile=$PROJECT_DIR$/build/classes/java/main/locks.refmap.json -AdefaultObfuscationEnv=named:intermediary -Aquiet=true -AoutMapFileNamedIntermediary=$PROJECT_DIR$/build/loom-cache/mixin-map-loom.mappings.1_20_1.layered+hash.2198-v2.main.tiny -AinMapFileNamedIntermediary=$USER_HOME$/.gradle/caches/fabric-loom/1.20.1/loom.mappings.1_20_1.layered+hash.2198-v2/mappings.tiny" />
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Locks-Reforked.test" options="-AoutRefMapFile=$PROJECT_DIR$/build/classes/java/test/test-locks.refmap.json -AdefaultObfuscationEnv=named:intermediary -Aquiet=true -AoutMapFileNamedIntermediary=$PROJECT_DIR$/build/loom-cache/mixin-map-loom.mappings.1_20_1.layered+hash.2198-v2.test.tiny -AinMapFileNamedIntermediary=$USER_HOME$/.gradle/caches/fabric-loom/1.20.1/loom.mappings.1_20_1.layered+hash.2198-v2/mappings.tiny" />
+      <module name="Locks-Rewritten.test" options="-AoutRefMapFile=$PROJECT_DIR$/build/classes/java/test/test-locks.refmap.json -AdefaultObfuscationEnv=named:intermediary -Aquiet=true -AoutMapFileNamedIntermediary=$PROJECT_DIR$/build/loom-cache/mixin-map-loom.mappings.1_20_1.layered+hash.2198-v2.test.tiny -AinMapFileNamedIntermediary=$USER_HOME$/.gradle/caches/fabric-loom/1.20.1/loom.mappings.1_20_1.layered+hash.2198-v2/mappings.tiny" />
     </option>
   </component>
 </project>

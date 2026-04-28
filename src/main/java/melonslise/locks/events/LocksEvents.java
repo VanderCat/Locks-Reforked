@@ -131,6 +131,8 @@ public final class LocksEvents
             return true;
         if (player.isCreative())
             return true;
+        if (locked.getLock().isEmpty())
+            return true;
         if (!locked.isOpen())
             return false;
         return true;
