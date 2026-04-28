@@ -13,6 +13,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.AbstractChestBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -38,6 +39,16 @@ public abstract class AbstractLocked implements Component, AutoSyncedComponent, 
             if (Locks.CONFIG.nonBlockEntityLocking())
                 return ChunkLocked.getFrom(level, pos);
             else
+                return null;
+        return Locked.getFrom(be);
+
+    };
+    public static AbstractLocked getFrom(BlockGetter getter, BlockPos pos) {
+        var be = getter.getBlockEntity(pos);
+        if (be == null)
+//            if (Locks.CONFIG.nonBlockEntityLocking())
+//                return ChunkLocked.getFrom(getter, pos); FIXME:
+//            else
                 return null;
         return Locked.getFrom(be);
 

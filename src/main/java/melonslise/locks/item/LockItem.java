@@ -25,9 +25,9 @@ import java.util.List;
 public class LockItem extends LockingItem {
 	public final int length;
 	public final int enchantmentValue;
-	public final int resistance;
+	public final float resistance;
 
-	public LockItem(int length, int enchVal, int resist, Properties props) {
+	public LockItem(int length, int enchVal, float resist, Properties props) {
 		super(props);
 		this.length = length;
 		this.enchantmentValue = enchVal;
@@ -60,7 +60,7 @@ public class LockItem extends LockingItem {
 	}
 
 	// WARNING: EXPECTS LOCKITEM STACK
-	public static int getResistance(ItemStack stack)
+	public static float getResistance(ItemStack stack)
 	{
 		return ((LockItem) stack.getItem()).resistance;
 	}

@@ -4,7 +4,6 @@ import melonslise.locks.Locks;
 import melonslise.locks.components.AbstractLocked;
 import melonslise.locks.init.LocksComponents;
 import melonslise.locks.init.LocksItemTags;
-import melonslise.locks.init.LocksItems;
 import melonslise.locks.init.LocksSoundEvents;
 import melonslise.locks.item.*;
 import net.fabricmc.fabric.api.event.player.AttackBlockCallback;
@@ -23,8 +22,8 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.item.enchantment.ProtectionEnchantment;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.DoubleBlockCombiner;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -155,5 +154,12 @@ public final class LocksEvents
 		PlayerBlockBreakEvents.BEFORE.register(LocksEvents::onBlockBreaking);
         AttackBlockCallback.EVENT.register(LocksEvents::onAttackBlock);
 		UseBlockCallback.EVENT.register(LocksEvents::onRightClick);
+        CanEnchantEvent.POST.register((e, stack) -> {
+            if (e instanceof ProtectionEnchantment p) {
+                if (p.type == ProtectionEnchantment.Type.EXPLOSION)
+                    if (stack.is(LocksItemTags.LOCKS)) return InteractionResult.SUCCESS;
+            }
+            return InteractionResult.PASS;
+        });
 	}
 }
